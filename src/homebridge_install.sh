@@ -49,20 +49,6 @@
 		fi
 	}
 
-# Test for old HomeBridge install
-	_home_bridge_remove() {
-		## Check for old install
-		_header "Checking for existing HomeBridge installation"
-		cd ${_install_dir}
-		if [[ $(ls | grep -c homebridge) == 1 ]]; then
-			_error "Found existing install"
-			sudo rm -rf homebridge
-			_success "Removed existing install"
-		else
-			_success "No existing installations"
-		fi
-	}
-
 # Install HomeBridge-server
 	_homebridge_setup() {
 		## List of nodes to install
@@ -73,12 +59,13 @@
 		## Install nodes
 			for i in "${node_list[@]}"; do
 				_header "Installing $i"
-				su - ${_username} bash -c 'npm install --unsafe-perm --silent $i > /dev/null'
+				cd ${_install_dir}
+				sudo npm install -g --unsafe-perm --silent $i > /dev/null
 				_success $i
 			done
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/homebridge"
-			sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_install_dir}/homebridge/bin/homebridge" 1
+			sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_node_dir}/lib/node_modules/homebridge/bin/homebridge" 1
 			_success "homebridge"
 		## Create HomeBridge working directory
 			_header "Create HomeBridge Var Directory"
@@ -90,6 +77,5 @@
 	_install_homebridge_main() {
 		_depends_install
 		_homebridge_user_setup
-		_home_bridge_remove
 		_homebridge_setup
 	}
