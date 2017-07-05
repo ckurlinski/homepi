@@ -31,7 +31,7 @@
 		_header "Checking for existing HomeBridge installation"
 		if [[ $(ls | grep -c homebridge) == 1 ]]; then
 			_error "Found existing install"
-			sudo -rf homebridge
+			sudo rm -rf homebridge
 			_success "Removed existing install"
 			_header "Creating New install Folder"
 			su - ${_username} bash -c 'mkdir homebridge'
