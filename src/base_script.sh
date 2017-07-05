@@ -1,12 +1,7 @@
 #!/bin/bash
 
 source homepi.conf
-source src/base_script.sh
-source src/cmd_install.sh
-source src/homebridge_install.sh
-source src/homebridge_service_install.sh
-source src/nodejs_install.sh
-source src/system_update.sh
+
 
 # Test if superuser
 	_su_test() {
