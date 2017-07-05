@@ -13,7 +13,6 @@ source src/system_update.sh
 		_install_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 	}
 
-
 # Main Menu
 	main_menu()  {
 		## Header
@@ -37,7 +36,7 @@ source src/system_update.sh
 					'_base_update'
 					'_depends_install'
 					'_node_install'
-					'_node_setup'
+					'_install_homebridge_main'
 					'_homebridge_defaults_setup'
 					'_config_json_setup'
 					'_start_homebridge_fn'
@@ -49,7 +48,6 @@ source src/system_update.sh
 	}
 # Set Script _base_dir
 	_base_dir
-	echo ${_install_dir}
 # Execute set color function
  _set_colors
 # Execute super user test

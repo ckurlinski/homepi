@@ -25,6 +25,21 @@
 		fi
 	}
 
+# Test for old HomeBridge install
+	_home_bridge_remove() {
+		## Check for old install
+		_header "Checking for existing HomeBridge installation"
+		if [[ $(ls | grep -c homebridge) == 1 ]]; then
+			_error "Found existing install"
+			sudo -rf homebridge
+			_success "Removed existing install"
+			_header "Creating New install Folder"
+			su - ${_username} bash -c 'mkdir homebridge'
+			_success "New HomeBridge Folder Created"
+		fi
+		_success "No existing installations"
+	}
+
 # Install HomeBridge
 	_home_bridge_install() {
 		_header "Cloning HomeBridge git repo"
@@ -36,12 +51,12 @@
 		_success "HomeBridge Installed"
 	## Create Symbolic Links
 		_header "Creating symbolic link to /usr/bin/homebridge"
-		sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_homebridge_install}/node_modules/homebridge/bin/homebridge" 1
+		sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_install_dir}/homebridge/node_modules/homebridge/bin/homebridge" 1
 		_success "homebridge"
 	}
 
 # Install HomeBridge-server
-	homebridge-server_setup() {
+	_homebridge_server_setup() {
 		_depends_install
 		_homebridge_user_setup
 		## List of nodes to install
@@ -58,4 +73,12 @@
 			_header "Create HomeBridge Var Directory"
 			sudo mkdir -p ${_homebridge_base}
 			_success ${_homebridge_base}
+	}
+
+# Homebridge Install
+	_install_homebridge_main() {
+		_homebridge_user_setup
+		_home_bridge_remove
+		_home_bridge_install
+		_homebridge_server_setup
 	}
