@@ -18,7 +18,6 @@ source src/system_update.sh
 	main_menu()  {
 		## Header
 			HEADING="HomeBridge"
-			echo "${_homebridge_install}"
 		## Write out the menu options array
 			### Use Double Quotes for Text
 				l0=(
@@ -50,6 +49,7 @@ source src/system_update.sh
 	}
 # Set Script _base_dir
 	_base_dir
+	echo ${_install_dir}
 # Execute set color function
  _set_colors
 # Execute super user test
