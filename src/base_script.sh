@@ -2,7 +2,7 @@
 
 # Set Script base directory
 	_base_dir() {
-		BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+		_install_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 	}
 
 # Test if superuser
