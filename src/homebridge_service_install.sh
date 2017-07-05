@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../homepi.conf
+source homepi.conf
 source base_script.sh
 source cmd_install.sh
 source homebridge_install.sh
