@@ -16,13 +16,13 @@ source src/system_update.sh
 			### Use Double Quotes for Text
 				l0=(
 					"Update Raspbian-Lite"
-					"(RE)install Dependencies"
+					"Install Dependencies"
 					"NodeJS install"
 					"Install Homebridge"
-					"(RE)install systemd Homebridge service files"
-					"(RE)install HomeBridge config.json"
-					"(RE)start HomeBridge services"
-					"Show Service Status"
+					"Install systemd Homebridge service files"
+					"Install HomeBridge config.json"
+					"Start HomeBridge services"
+					"Show HomeBridge Service Status"
 					"Exit"
 				)
 		## Map Menu to command Array
@@ -41,6 +41,8 @@ source src/system_update.sh
 		## Execute Menu Function
 			g_menu_fn
 	}
+# Set Script _base_dir
+	_base_dir
 # Execute set color function
  _set_colors
 # Execute super user test

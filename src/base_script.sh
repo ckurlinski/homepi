@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Set Script base directory
+	_base_dir() {
+		BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+	}
+
 # Test if superuser
 	_su_test() {
 		# Script must be run as root
