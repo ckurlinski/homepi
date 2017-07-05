@@ -39,6 +39,8 @@
 				"Restart=on-failure"
 				"RestartSec=10"
 				"KillMode=process"
+				"User=${_username}"
+				"Group=users"
 				"[Install]"
 				"WantedBy=multi-user.target"
 			)

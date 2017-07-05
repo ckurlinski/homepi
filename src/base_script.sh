@@ -97,11 +97,6 @@
   		while :
   		do
   			_header ${HEADING}
-  			if [ "${ERR_MSG} != """ ]; then
-  				_warning "ERROR: ${ERR_MSG}"
-  			fi
-  			## Reset Error MSG
-  				ERR_MSG="What you talkin' 'bout Willis!!!!!'"
   			## Generate menu list from menu options array
   				menu_list_template
   			## Run choosen command from menu command array

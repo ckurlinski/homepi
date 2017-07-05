@@ -40,21 +40,15 @@
 			sudo usermod -G gpio ${_username}
 			_success "Added ${_username} to the gpio group"
 		fi
-		# Add homebridge user to the system group
-		if [ $(id -nG ${_username} | grep -c "system") == 0 ]; then
-			_error "${_username} is not a member of system"
-			_header "Adding ${_username} to the system group"
-			sudo usermod -G system ${_username}
-			_success "Added ${_username} to the system group"
-		fi
 	}
 
 # Install HomeBridge-server
 	_homebridge_setup() {
 		## List of nodes to install
 			node_list=(
-				homebridge@latest
-				homebridge-server@latest
+				npm
+				homebridge
+				homebridge-server
 			)
 		## Install nodes
 			for i in "${node_list[@]}"; do
