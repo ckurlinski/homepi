@@ -26,24 +26,34 @@
 	}
 
 # Install HomeBridge
-	_node_setup() {
+	_home_bridge_install() {
+		_header "Cloning HomeBridge git repo"
+		git clone https://github.com/nfarina/homebridge.git
+		git pull
+		_success "HomeBridge Cloned"
+		_header "Installing HomeBridge"
+		su - ${_username} bash -c 'npm install npm install --unsafe-perm --silent > /dev/null'
+		_success "HomeBridge Installed"
+	## Create Symbolic Links
+		_header "Creating symbolic link to /usr/bin/homebridge"
+		sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_homebridge_install}/node_modules/homebridge/bin/homebridge" 1
+		_success "homebridge"
+	}
+
+# Install HomeBridge-server
+	homebridge-server_setup() {
 		_depends_install
 		_homebridge_user_setup
 		## List of nodes to install
 			node_list=(
-				homebridge@latest
 				homebridge-server@latest
 			)
 		## Install nodes
 			for i in "${node_list[@]}"; do
 				_header "Installing $i"
-				sudo -H -u ${_username} bash -c 'npm install --unsafe-perm --silent $i > /dev/null'
+				su - ${_username} bash -c 'npm install --unsafe-perm --silent $i > /dev/null'
 				_success $i
 			done
-		## Create Symbolic Links
-			_header "Creating symbolic link to /usr/bin/homebridge"
-			sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_homebridge_install}/node_modules/homebridge/bin/homebridge" 1
-			_success "homebridge"
 		## Create HomeBridge working directory
 			_header "Create HomeBridge Var Directory"
 			sudo mkdir -p ${_homebridge_base}

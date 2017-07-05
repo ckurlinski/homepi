@@ -12,6 +12,7 @@ source src/system_update.sh
 	main_menu()  {
 		## Header
 			HEADING="HomeBridge"
+			echo "${_homebridge_install}"
 		## Write out the menu options array
 			### Use Double Quotes for Text
 				l0=(
