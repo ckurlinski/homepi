@@ -59,6 +59,7 @@
 			sudo rm -rf homebridge
 			_success "Removed existing install"
 			_header "Creating New install Folder"
+			cd ${_install_dir}
 			su - ${_username} bash -c 'mkdir homebridge'
 			_success "New HomeBridge Folder Created"
 		fi
