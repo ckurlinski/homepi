@@ -1,13 +1,5 @@
 #!/bin/bash
 
-source homepi.conf
-source base_script.sh
-source cmd_install.sh
-source homebridge_install.sh
-source homebridge_service_install.sh
-source nodejs_install.sh
-source system_update.sh
-
 # Install NodeJS
 	_node_install() {
 		## Download NodeJS and extract

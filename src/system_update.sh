@@ -1,13 +1,5 @@
 #!/bin/bash
 
-source homepi.conf
-source base_script.sh
-source cmd_install.sh
-source homebridge_install.sh
-source homebridge_service_install.sh
-source nodejs_install.sh
-source system_update.sh
-
 # Update apt cache and upgrade
 	_base_update() {
 		_header "Updating apt cache"

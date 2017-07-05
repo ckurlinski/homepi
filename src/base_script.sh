@@ -1,8 +1,5 @@
 #!/bin/bash
 
-source homepi.conf
-
-
 # Test if superuser
 	_su_test() {
 		# Script must be run as root
