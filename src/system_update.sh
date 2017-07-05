@@ -21,8 +21,14 @@
 			)
 		## Install dependencies
 			for i in "${depends_install_list[@]}"; do
-				_header "Installing Dependency - $i"
-				sudo apt-get install -y $i  > /dev/null
-				_success $i
+				_header "Checking Dependencies..."
+				if [[ $(dpkg-query --show | grep -wc $i) == 0 ]]; then
+					_error "Dependency missing"
+					_header "Installing Dependency - $i"
+					sudo apt install -y $i  > /dev/null
+					_success $i
+				else
+					_success "Dependency Installed - $i"
+				fi
 			done
 	}
