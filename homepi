@@ -8,6 +8,12 @@ source src/homebridge_service_install.sh
 source src/nodejs_install.sh
 source src/system_update.sh
 
+# Set Script base directory
+	_base_dir() {
+		_install_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+	}
+
+
 # Main Menu
 	main_menu()  {
 		## Header
