@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# Install HomeBridge extra / dependencies
+	_node_dependencies_setup() {
+		## List of nodes to install
+			node_list=(
+				homebridge-gpio-wpi2@latest
+				homebridge-cmdaccessory@latest
+			)
+		## Install nodes
+			for i in "${node_list[@]}"; do
+				_header "Installing $i"
+				sudo -H -u ${_username} bash -c 'npm install -g --silent $i > /dev/null'
+				_success $i
+			done
+	}
+
 # Install cmdlets scripts
 	_faac_door_scripts_install() {
 		## Files to be created

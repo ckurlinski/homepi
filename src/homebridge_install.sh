@@ -4,13 +4,13 @@
 	_node_setup() {
 		## List of nodes to install
 			node_list=(
-				homebridge@latest
+				homebridge
 				homebridge-server@latest
 			)
 		## Install nodes
 			for i in "${node_list[@]}"; do
 				_header "Installing $i"
-				sudo npm install -g --unsafe-perm --silent $i > /dev/null
+				sudo -H -u ${_username} bash -c 'npm install --unsafe-perm --silent $i > /dev/null'
 				_success $i
 			done
 		## Create Symbolic Links

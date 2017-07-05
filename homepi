@@ -24,7 +24,6 @@ source src/system_update.sh
 					"(RE)start HomeBridge services"
 					"Show Service Status"
 					"Exit"
-					"Exit and Reboot"
 				)
 		## Map Menu to command Array
 			### Use Single Quotes for Commands
@@ -38,7 +37,6 @@ source src/system_update.sh
 					'_start_homebridge_fn'
 					'_service_status'
 					'exit'
-					'sudo reboot'
 					)
 		## Execute Menu Function
 			g_menu_fn

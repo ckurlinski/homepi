@@ -24,22 +24,6 @@
 		fi
 	}
 
-	# Install HomeBridge extra / dependencies
-		_node_dependencies_setup() {
-			## List of nodes to install
-				node_list=(
-					homebridge-gpio-wpi2@latest
-					homebridge-cmdaccessory@latest
-				)
-			## Install nodes
-				for i in "${node_list[@]}"; do
-					_header "Installing $i"
-					sudo npm install -g --silent $i > /dev/null
-					_success $i
-				done
-		}
-
-
 # HomeBridge systemd service setup
 	_homebridge_service_setup() {
 			_header "Installing Service : ${_service_file}"
