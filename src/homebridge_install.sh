@@ -42,7 +42,7 @@
 			done
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/homebridge"
-			sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_install_dir}/node_modules/homebridge/bin/homebridge" 1
+			sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${_homebridge_install}/node_modules/homebridge/bin/homebridge" 1
 			_success "homebridge"
 		## Create HomeBridge working directory
 			_header "Create HomeBridge Var Directory"
