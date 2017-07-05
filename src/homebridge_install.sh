@@ -58,23 +58,9 @@
 			_error "Found existing install"
 			sudo rm -rf homebridge
 			_success "Removed existing install"
-			_header "Creating New install Folder"
-			cd ${_install_dir}
-			su - ${_username} bash -c 'mkdir homebridge'
-			_success "New HomeBridge Folder Created"
+		else
+			_success "No existing installations"
 		fi
-		_success "No existing installations"
-	}
-
-# Install HomeBridge
-	_home_bridge_install() {
-		_header "Cloning HomeBridge git repo"
-		git clone https://github.com/nfarina/homebridge.git
-		git pull
-		_success "HomeBridge Cloned"
-		_header "Installing HomeBridge"
-		su - ${_username} bash -c 'npm install npm install --unsafe-perm --silent > /dev/null'
-		_success "HomeBridge Installed"
 	}
 
 # Install HomeBridge-server
