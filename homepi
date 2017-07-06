@@ -1,17 +1,43 @@
 #!/bin/bash
 
-source homepi.conf
+source config/homepi.conf
 source src/base_script.sh
 source src/cmd_install.sh
 source src/homebridge_install.sh
 source src/homebridge_service_install.sh
 source src/nodejs_install.sh
 source src/system_update.sh
+source poolpi/circuit_status.sh
+source poolpi/circuit_toogle.sh
 
 # Set Script base directory
 	_base_dir() {
 		_install_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 	}
+
+# Pool Menu
+	pool_menu()  {
+		## Header
+			HEADING="HomeBridge"
+		## Write out the menu options array
+			### Use Double Quotes for Text
+				l0=(
+					"Circuit Status"
+					"Circuit Toogle"
+					"Return"
+				)
+		## Map Menu to command Array
+			### Use Single Quotes for Commands
+				opt0=(
+					'circuit_status_fn'
+					'circuit_toogle_fn'
+					'main_menu'
+					)
+		## Execute Menu Function
+			g_menu_fn
+	}
+
+
 
 # Main Menu
 	main_menu()  {
@@ -29,6 +55,7 @@ source src/system_update.sh
 					"Start HomeBridge services"
 					"Show HomeBridge Service Status"
 					"FAAC GPIO Door Opener"
+					"Pool PI Menu"
 					"Exit"
 				)
 		## Map Menu to command Array
@@ -43,6 +70,7 @@ source src/system_update.sh
 					'_start_homebridge_fn'
 					'_service_status'
 					'_faac_install'
+					'pool_menu'
 					'exit'
 					)
 		## Execute Menu Function

@@ -1,13 +1,13 @@
 #!/bin/bash
-
 source config/poolpi.conf
 
-circuit_status_fn () {
+circuit_toogle_fn () {
   circuit_select_fn
   _status=(`node -pe 'JSON.parse(process.argv[1]).status' "$(curl -s ${_server_ip}:${_server_port}/circuit/${_circuit})"`)
   if [[ ${_status} == 0 ]]; then
-    echo "Circuit ${_circuit} status is off"
+    _select "Turning Circuit ${_circuit} - ON"
   else
-    echo "Circuit ${_circuit} status is on"
+    _select "Turning Circuit ${_circuit} - OFF"
   fi
+  _toggle=(`curl -s ${_server_ip}:${_server_port}/circuit/${_circuit}/toogle`)
 }
