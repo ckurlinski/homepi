@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install HomeBridge extra / dependencies
-	_node_dependencies_setup() {
+	_faac_node_dependencies_setup() {
 		## List of nodes to install
 			node_list=(
 				homebridge-gpio-wpi2@latest
@@ -10,12 +10,12 @@
 		## Install nodes
 			for i in "${node_list[@]}"; do
 				_header "Installing $i"
-				sudo -H -u ${_username} bash -c 'npm install -g --silent $i > /dev/null'
+				sudo npm install -g --silent $i > /dev/null
 				_success $i
 			done
 	}
 
-# Install cmdlets scripts
+# Install FAAC cmdlets scripts
 	_faac_door_scripts_install() {
 		## Files to be created
 			_file1="door_open.sh"
@@ -72,4 +72,10 @@
 			_header "Creating symbolic links to /usr/bin - ${_file2}"
 			sudo update-alternatives --install "/usr/bin/${_file2}" "${_file2}" "${_cmdaccessory_cmdlets}/${_file2}" 1
 			_success "symbolic links - ${_cmdaccessory_cmdlets}/${_file2}"
+	}
+
+## FAAC Installation
+	_faac_install() {
+		_faac_node_dependencies_setup
+		_faac_door_scripts_install
 	}

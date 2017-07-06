@@ -28,6 +28,7 @@ source src/system_update.sh
 					"Install HomeBridge config.json"
 					"Start HomeBridge services"
 					"Show HomeBridge Service Status"
+					"FAAC GPIO Door Opener"
 					"Exit"
 				)
 		## Map Menu to command Array
@@ -41,6 +42,7 @@ source src/system_update.sh
 					'_config_json_setup'
 					'_start_homebridge_fn'
 					'_service_status'
+					'_faac_install'
 					'exit'
 					)
 		## Execute Menu Function
