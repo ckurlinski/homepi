@@ -1,0 +1,26 @@
+{
+  "platform": "cmdSwitch2",
+  "name": "Pool Accessory",
+  "switches": [
+    {
+      "name": "Vacuum Pump",
+      "on_cmd": "curl -s 127.0.0.1:3000/circuit/2/toggle",
+      "off_cmd": "curl -s 127.0.0.1:3000/circuit/2/toggle",
+      "state_cmd": "curl -s 127.0.0.1:3000/circuit/2",
+      "polling": true,
+      "interval": 3,
+      "manufacturer": "Pentair",
+      "type": "Switch"
+    },
+    {
+      "name": "Overflow Pump",
+      "on_cmd": "curl -s 127.0.0.1:3000/circuit/3/toggle",
+      "off_cmd": "curl -s 127.0.0.1:3000/circuit/3/toggle",
+      "state_cmd": "curl -s 127.0.0.1:3000/circuit/3",
+      "polling": true,
+      "interval": 3,
+      "manufacturer": "Pentair",
+      "type": "Switch"
+    }
+  ]
+}
