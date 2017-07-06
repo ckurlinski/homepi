@@ -11,7 +11,7 @@
 		## Install nodes
 			for i in "${node_list[@]}"; do
 				_header "Installing $i"
-				sudo npm install -g --unsafe-perm--silent $i > /dev/null
+				sudo npm install -g --unsafe-perm --silent $i > /dev/null
 				_success $i
 			done
 	}
