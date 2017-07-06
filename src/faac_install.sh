@@ -1,20 +1,5 @@
 #!/bin/bash
 
-# Install HomeBridge extra / dependencies
-	_faac_node_dependencies_setup() {
-		## List of nodes to install
-			node_list=(
-				homebridge-gpio-wpi2@latest
-				homebridge-cmdaccessory@latest
-			)
-		## Install nodes
-			for i in "${node_list[@]}"; do
-				_header "Installing $i"
-				sudo npm install -g --silent $i > /dev/null
-				_success $i
-			done
-	}
-
 # Install FAAC cmdlets scripts
 	_faac_door_scripts_install() {
 		## Files to be created
@@ -76,6 +61,5 @@
 
 ## FAAC Installation
 	_faac_install() {
-		_faac_node_dependencies_setup
 		_faac_door_scripts_install
 	}
