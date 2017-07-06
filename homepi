@@ -58,6 +58,7 @@ source poolpi/circuit_select.sh
 					"Start HomeBridge services"
 					"Show HomeBridge Service Status"
 					"FAAC GPIO Door Opener"
+					"npm extra installations"
 					"Pool PI Menu"
 					"Exit"
 				)
@@ -73,6 +74,7 @@ source poolpi/circuit_select.sh
 					'_start_homebridge_fn'
 					'_service_status'
 					'_faac_install'
+					'_node_extras_setup'
 					'pool_menu'
 					'exit'
 					)
