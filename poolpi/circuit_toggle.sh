@@ -9,4 +9,5 @@ circuit_toggle_fn () {
     _select "Turning Circuit ${_circuit} - OFF"
   fi
   _toggle=(`curl -s ${_server_ip}:${_server_port}/circuit/${_circuit}/toogle`)
+  pool_menu
 }

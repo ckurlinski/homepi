@@ -8,4 +8,5 @@ circuit_status_fn () {
   else
     echo "Circuit ${_circuit} status is on"
   fi
+  pool_menu
 }
