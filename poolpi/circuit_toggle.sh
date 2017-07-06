@@ -1,5 +1,4 @@
 #!/bin/bash
-source config/poolpi.conf
 
 circuit_toogle_fn () {
   circuit_select_fn
