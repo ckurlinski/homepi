@@ -8,6 +8,6 @@ circuit_toggle_fn () {
   else
     _select "Turning Circuit ${_circuit} - OFF"
   fi
-  curl -s ${_server_ip}:${_server_port}/circuit/${_circuit}/toggle
+  curl -s ${_server_ip}:${_server_port}/circuit/${_circuit}/toggle > /dev/null
   pool_menu
 }
