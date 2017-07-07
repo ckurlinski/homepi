@@ -10,7 +10,7 @@ source incl.sh
 # Main Menu
 	main_menu()  {
 		## Header
-			HEADING="HomeBridge"
+			HEADING="HomePi"
 		## Write out the menu options array
 			### Use Double Quotes for Text
 				l0=(
