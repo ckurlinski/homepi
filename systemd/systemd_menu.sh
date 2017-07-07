@@ -31,5 +31,3 @@
 		## Execute Menu Function
 			g_menu_fn
 	}
-
-systemd_menu
