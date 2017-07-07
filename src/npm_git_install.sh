@@ -35,14 +35,14 @@
 
 # Install software
 	_git_software_install() {
-		_header "Installing ${_node_name}"
-		cd ${_git_node_dir}/${_node_name}
-		sudo npm install -g --unsafe-perm --silent ${_node_name} > /dev/null
-		_success "${_node_name} installed"
+		_header "Installing ${_git_node_name}"
+		cd ${_git_node_dir}/${_git_node_name}
+		sudo npm install -g --unsafe-perm --silent > /dev/null
+		_success "${_git_node_name} installed"
 		## Creating executable
-			_header "Creating executable ${_systemd_service_name}"
-			echo ${_npm_start_cmd} > ${_node_name}/bin/${_systemd_service_name}
-			_success "${_node_name}/bin/${_systemd_service_name} Created"
+			_header "Creating executable ${_git_cmd_dir}/${_systemd_service_name}"
+			echo ${_npm_start_cmd} > ${_git_cmd_dir}/${_systemd_service_name}
+			_success "${_git_cmd_dir}/${_systemd_service_name} Created"
 		## Make file executable
 			_header "Making ${_systemd_service_name} executable"
 			sudo chmod +x ${_node_name}/bin/${_systemd_service_name}
