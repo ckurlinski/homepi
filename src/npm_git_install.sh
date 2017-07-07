@@ -56,6 +56,7 @@
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/${_systemd_service_name}"
 			sudo update-alternatives --install "/usr/bin/"${_systemd_service_name} "${_systemd_service_name}" "${_git_cmd_dir}/${_systemd_service_name}" 1
+			sudo chmod 755 "/usr/bin/"${_systemd_service_name}
 			_success "${_systemd_service_name}"
 }
 
