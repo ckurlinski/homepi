@@ -9,7 +9,7 @@
 			sudo useradd -M --system ${_username}
 			_success "Created ${_username}"
 		fi
-		# Add homebridge user to the gpio group
+		# Add user to the gpio group
 		if [ $(id -nG ${_username} | grep -c "gpio") == 0 ]; then
 			_error "${_username} is not a member of gpio"
 			_header "Adding ${_username} to the gpio group"
@@ -19,19 +19,19 @@
 	}
 # Clone Git repo
   _get_repo() {
-    cd ${_node_dir}
+    cd ${_git_node_dir}
     sudo git clone ${_git_repo}
   }
 
 # Git select branch
   _get_branch() {
-    cd ${_node_name}
+    cd ${_git_node_name}
     sudo git checkout ${_git_branch}
     sudo git pull
   }
 
 # Install software
-	_software_install() {
+	_git_software_install() {
 		_header "Installing ${_node_name}"
 		cd ${_install_dir}
 		sudo npm install -g --unsafe-perm --silent ${_node_name} > /dev/null
@@ -43,7 +43,7 @@
 	}
 
 # Software Install Main
-	_install_service_fn() {
+	_install_git_software_fn() {
 		_user_setup
 		_get_repo
 		_get_branch

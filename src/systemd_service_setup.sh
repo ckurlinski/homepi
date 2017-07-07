@@ -84,9 +84,17 @@
 			_success "${_systemd_service_name} started"
 	}
 # Show systemd service status
-	_service_status() {
+	_systemd_service_status() {
 		## Show systemd service status
 			_header "${_systemd_service_name} Status"
 			sudo systemctl status -l ${_systemd_service_name}
 			_success "${_systemd_service_name} Running....."
+	}
+
+# systemd Service install Function
+	_systemd_service_install_fn() {
+		_systemd_services_remove
+		_systemd_service_setup
+		_systemd_service_defaults_setup
+		_start_systemd_fn
 	}
