@@ -50,5 +50,5 @@
 		_user_setup
 		_get_repo
 		_get_branch
-    _software_install
+    _git_software_install
 	}
