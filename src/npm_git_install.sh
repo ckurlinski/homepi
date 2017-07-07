@@ -39,19 +39,25 @@
 		cd ${_git_node_dir}/${_git_node_name}
 		sudo npm install -g --unsafe-perm --silent > /dev/null
 		_success "${_git_node_name} installed"
+	}
+	_git_create_executable() {
 		## Creating executable
+		if [[ ${_git_cmd_dir}/${_systemd_service_name} -e ]]; then
+			_success "${_git_cmd_dir}/${_systemd_service_name} is already Created"
+		else
 			_header "Creating executable ${_git_cmd_dir}/${_systemd_service_name}"
 			echo ${_npm_start_cmd} > ${_git_cmd_dir}/${_systemd_service_name}
 			_success "${_git_cmd_dir}/${_systemd_service_name} Created"
+		fi
 		## Make file executable
 			_header "Making ${_git_cmd_dir}/${_systemd_service_name} executable"
-			sudo chmod +x ${_git_cmd_dir}/${_systemd_service_name}
+			sudo chmod 755 ${_git_cmd_dir}/${_systemd_service_name}
 			_success "${_git_cmd_dir}/${_systemd_service_name} made executable"
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/${_systemd_service_name}"
-			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_node_name}/bin/${_systemd_service_name}" 1
+			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_git_cmd_dir}/${_systemd_service_name}" 1
 			_success "${_systemd_service_name}"
-	}
+}
 
 # Software Install Main
 	_install_git_software_fn() {

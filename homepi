@@ -17,6 +17,7 @@ source incl.sh
 					"Circuit Status"
 					"Circuit Toogle"
 					"nodejs-poolController install"
+					"fix executable"
 					"nodejs-poolController service setup"
 					"Return"
 				)
@@ -26,6 +27,7 @@ source incl.sh
 					'circuit_status_fn'
 					'circuit_toggle_fn'
 					'_pool_controller_install'
+					'_git_create_executable'
 					'_pool_controller_service_install'
 					'main_menu'
 					)
