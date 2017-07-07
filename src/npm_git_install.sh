@@ -55,7 +55,7 @@
 			_success "${_git_cmd_dir}/${_systemd_service_name} made executable"
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/${_systemd_service_name}"
-			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_git_cmd_dir}/${_systemd_service_name}" 1
+			sudo update-alternatives --install "/usr/bin/${_systemd_service_name}" "${_systemd_service_name}" "${_git_cmd_dir}/${_systemd_service_name}" 1
 			_success "${_systemd_service_name}"
 }
 
