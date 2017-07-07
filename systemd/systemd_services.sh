@@ -3,7 +3,7 @@
 # Select service
 # list is defined in config/base.conf
   _systemd_service_select() {
-    l0=${_systemd_service_list[@]}
+    l0=(`echo ${_systemd_service_list[@]}`)
     list_template
     _selected_service=${_list_output}
   }
