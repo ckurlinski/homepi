@@ -3,7 +3,7 @@
 # User Setup
 	_user_setup() {
 		if [ $(getent passwd ${_username}) ]; then
-			_header "${_username} exists....."
+			_header "User: ${_username} exists....."
 		else
 			_header "Creating ${_username}"
 			sudo useradd -M --system ${_username}
@@ -44,9 +44,9 @@
 			echo ${_npm_start_cmd} > ${_git_cmd_dir}/${_systemd_service_name}
 			_success "${_git_cmd_dir}/${_systemd_service_name} Created"
 		## Make file executable
-			_header "Making ${_systemd_service_name} executable"
-			sudo chmod +x ${_node_name}/bin/${_systemd_service_name}
-			_success "${_node_name}/bin/${_systemd_service_name} made executable"
+			_header "Making ${_git_cmd_dir}/${_systemd_service_name} executable"
+			sudo chmod +x ${_git_cmd_dir}/${_systemd_service_name}
+			_success "${_git_cmd_dir}/${_systemd_service_name} made executable"
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/${_systemd_service_name}"
 			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_node_name}/bin/${_systemd_service_name}" 1
