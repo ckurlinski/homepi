@@ -42,7 +42,7 @@
 	}
 	_git_create_executable() {
 		## Creating executable
-		if [[ ${_git_cmd_dir}/${_systemd_service_name} -e ]]; then
+		if [[ -f "${_git_cmd_dir}/${_systemd_service_name}" ]]; then
 			_success "${_git_cmd_dir}/${_systemd_service_name} is already Created"
 		else
 			_header "Creating executable ${_git_cmd_dir}/${_systemd_service_name}"
