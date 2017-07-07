@@ -3,7 +3,9 @@
 # Execute this:
 # find . -print | grep .conf | sed 's/\.\///g' | awk '{print"source "$0}'
 # to update the Config file list
-source config/homepi.conf
+source config/base.conf
+source config/homebridge.conf
+source config/npm.conf
 source config/poolpi.conf
 
 # Execute this:
@@ -13,9 +15,10 @@ source config/poolpi.conf
 # Execute this:
 # find . -print | grep .sh | sed 's/\.\///g' | awk '{print"source "$0}'
 # to update the source Shell Script list
+source npm/npm_status.sh
 source poolpi/poolcontroller_install.sh
+source poolpi/poolcontroller_menu.sh
 source poolpi/poolcontroller_service_install.sh
-source poolpi/poolcontroller_service_status.sh
 source poolpi/src/circuit_select.sh
 source poolpi/src/circuit_status.sh
 source poolpi/src/circuit_toggle.sh
@@ -27,4 +30,6 @@ source src/nodejs_install.sh
 source src/npm_git_install.sh
 source src/npm_install.sh
 source src/system_update.sh
-source src/systemd_service_setup.sh
+source systemd/systemd_menu.sh
+source systemd/systemd_service_setup.sh
+source systemd/systemd_services.sh
