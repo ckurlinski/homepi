@@ -39,9 +39,13 @@
 		cd ${_git_node_dir}/${_node_name}
 		sudo npm install -g --unsafe-perm --silent ${_node_name} > /dev/null
 		_success "${_node_name} installed"
+		## Creating executable
+			_header "Creating executable ${_systemd_service_name}"
+			echo ${_npm_start_cmd} > ${_node_name}/bin/${_systemd_service_name}
+			_success "${_node_name}/bin/${_systemd_service_name} Created"
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/${_systemd_service_name}"
-			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_npm_start_cmd}" 1
+			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_node_name}/bin/${_systemd_service_name}" 1
 			_success "${_systemd_service_name}"
 	}
 
