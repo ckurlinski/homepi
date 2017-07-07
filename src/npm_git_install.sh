@@ -17,10 +17,13 @@
 			_success "Added ${_username} to the gpio group"
 		fi
 	}
+
 # Clone Git repo
   _get_repo() {
-    cd ${_git_node_dir}
-    sudo git clone ${_git_repo}
+		cd ${_git_node_dir}
+		if [[ -z $(find . -type d -name ${_git_node_name}) ]]; then
+			sudo git clone ${_git_repo}
+		fi
   }
 
 # Git select branch
