@@ -1,17 +1,6 @@
 #!/bin/bash
 
-source config/homepi.conf
-source config/poolpi.conf
-source src/base_script.sh
-source src/faac_install.sh
-source src/homebridge_install.sh
-source src/homebridge_service_install.sh
-source src/nodejs_install.sh
-source src/system_update.sh
-source src/npm_install.sh
-source poolpi/circuit_status.sh
-source poolpi/circuit_toggle.sh
-source poolpi/circuit_select.sh
+source incl.sh
 
 # Set Script base directory
 	_base_dir() {

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# User Setup
+	_user_setup() {
+		if [ $(getent passwd ${_username}) ]; then
+			_header "${_username} exists....."
+		else
+			_header "Creating ${_username}"
+			sudo useradd -M --system ${_username}
+			_success "Created ${_username}"
+		fi
+		# Add homebridge user to the gpio group
+		if [ $(id -nG ${_username} | grep -c "gpio") == 0 ]; then
+			_error "${_username} is not a member of gpio"
+			_header "Adding ${_username} to the gpio group"
+			sudo usermod -G gpio ${_username}
+			_success "Added ${_username} to the gpio group"
+		fi
+	}
+# Clone Git repo
+  _get_repo() {
+    cd ${_node_dir}
+    sudo git clone ${_git_repo}
+  }
+
+# Git select branch
+  _get_branch() {
+    cd ${_node_name}
+    sudo git checkout ${_git_branch}
+    sudo git pull
+  }
+
+# Install software
+	_software_install() {
+		_header "Installing ${_node_name}"
+		cd ${_install_dir}
+		sudo npm install -g --unsafe-perm --silent ${_node_name} > /dev/null
+		_success "${_node_name} installed"
+		## Create Symbolic Links
+			_header "Creating symbolic link to /usr/bin/${_systemd_service_name}"
+			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_npm_start_cmd}" 1
+			_success "${_systemd_service_name}"
+	}
+
+# Software Install Main
+	_install_service_fn() {
+		_user_setup
+		_get_repo
+		_get_branch
+    _software_install
+	}
