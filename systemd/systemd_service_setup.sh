@@ -68,33 +68,13 @@
 			sudo chmod 644 ${_systemd_service_default_file}
 			_success ${_systemd_service_default_file}
 	}
-# Start systemd services
-	_start_systemd_fn() {
-		## Reload systemd daemon
-			_header "Reloading systemd daemon"
-			sudo systemctl daemon-reload
-			_success "systemd daemon reloaded"
-		## Enable service
-			_header "Enabling ${_systemd_service_name} service"
-			sudo systemctl enable ${_systemd_service_name}
-			_success "${_systemd_service_name} Enabled"
-		## Start service
-			_header "Starting ${_systemd_service_name}"
-			sudo systemctl restart ${_systemd_service_name}
-			_success "${_systemd_service_name} started"
-	}
-# Show systemd service status
-	_systemd_service_status() {
-		## Show systemd service status
-			_header "${_systemd_service_name} Status"
-			sudo systemctl status -l ${_systemd_service_name}
-			_success "${_systemd_service_name} Running....."
-	}
-
 # systemd Service install Function
 	_systemd_service_install_fn() {
 		_systemd_services_remove
 		_systemd_service_setup
 		_systemd_service_defaults_setup
-		_start_systemd_fn
+		_systemd_reload_daemon
+		_header "Starting ${_systemd_service_name}"
+		sudo systemctl start ${_systemd_service_name}
+		_success "${_systemd_service_name} Started"
 	}

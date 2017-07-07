@@ -36,7 +36,7 @@
 # Install software
 	_git_software_install() {
 		_header "Installing ${_node_name}"
-		cd ${_install_dir}
+		cd ${_git_node_dir}/${_node_name}
 		sudo npm install -g --unsafe-perm --silent ${_node_name} > /dev/null
 		_success "${_node_name} installed"
 		## Create Symbolic Links

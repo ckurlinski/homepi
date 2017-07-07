@@ -2,14 +2,6 @@
 
 # HomeBridge Install Dependencies
 	_depends_install() {
-		## depends_install_list
-			depends_install_list=(
-				libavahi-compat-libdnssd-dev
-				wget
-				make
-				bc
-				wiringpi
-			)
 		## Install dependencies
 			for i in "${depends_install_list[@]}"; do
 				_header "Checking Dependencies..."
@@ -44,14 +36,8 @@
 
 # Install HomeBridge-server
 	_homebridge_setup() {
-		## List of nodes to install
-			node_list=(
-				npm
-				homebridge
-				homebridge-server
-			)
 		## Install nodes
-			for i in "${node_list[@]}"; do
+			for i in "${homebridge_install_list[@]}"; do
 				_header "Installing $i"
 				cd ${_install_dir}
 				sudo npm install -g --unsafe-perm --silent $i > /dev/null
