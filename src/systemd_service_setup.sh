@@ -29,8 +29,8 @@
 			_header "Installing Service : ${_systemd_service_file}"
 		## Config file is called from config/*.conf -- * is the name of the service
 		## Create Service file
-			_header "Installing ${_systemd_service_defaults_list}"
-			for i in "${_systemd_service_defaults_list[@]}"; do
+			_header "Installing ${_systemd_service_file}"
+			for i in "${_systemd_service_file_list[@]}"; do
 				sudo echo $i >> ${_systemd_service_file}
 			done
 			_success "Installed ${_systemd_service_file}"
@@ -48,7 +48,7 @@
 			_systemd_service_setup
 		## Create service defaults file - source homebridge_defaults.conf @ homebridge_defaults_list
 			_header "Installing Service Defaults - ${_systemd_service_default_file}"
-			for i in "${_systemd_service_defaults_list[@]}"; do
+			for i in "${_systemd_service_default_list[@]}"; do
 				sudo echo $i >> ${_systemd_service_default_file}
 			done
 			_success "Install ${_systemd_service_default_file}"
