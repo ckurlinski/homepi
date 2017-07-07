@@ -43,6 +43,10 @@
 			_header "Creating executable ${_systemd_service_name}"
 			echo ${_npm_start_cmd} > ${_node_name}/bin/${_systemd_service_name}
 			_success "${_node_name}/bin/${_systemd_service_name} Created"
+		## Make file executable
+			_header "Making ${_systemd_service_name} executable"
+			sudo chmod +x ${_node_name}/bin/${_systemd_service_name}
+			_success "${_node_name}/bin/${_systemd_service_name} made executable"
 		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/${_systemd_service_name}"
 			sudo update-alternatives --install "/usr/bin/$_systemd_service_name}" "${_systemd_service_name}" "${_node_name}/bin/${_systemd_service_name}" 1
