@@ -6,7 +6,6 @@
     l0=(`echo ${_systemd_service_list[@]}`)
     list_template
     _selected_service=${_list_output}
-    systemd_menu
   }
 
 # Show systemd service status
@@ -15,7 +14,7 @@
 		_header "${_selected_service} Status"
 		sudo systemctl status -l ${_selected_service}
 		_success "${_selected_service} Running....."
-    systemd_menu
+    unset $l0
 	}
 
 # Enable systemd service
@@ -24,7 +23,7 @@
 		_header "Enabling ${_selected_service}"
 		sudo systemctl enable ${_selected_service}
 		_success "${_selected_service} Enabled"
-    systemd_menu
+    unset $l0
 	}
 
 # Disable systemd service
@@ -33,7 +32,7 @@
 		_header "Disabling ${_selected_service}"
 		sudo systemctl disable ${_selected_service}
 		_success "${_selected_service} Disabled"
-    systemd_menu
+    unset $l0
 	}
 
 # Stop systemd service
@@ -42,7 +41,7 @@
 		_header "Stopping ${_selected_service}"
 		sudo systemctl stop ${_selected_service}
 		_success "${_selected_service} Stopped"
-    systemd_menu
+    unset $l0
 	}
 
 # Start systemd service
@@ -51,7 +50,7 @@
 		_header "Starting ${_selected_service}"
 		sudo systemctl start ${_selected_service}
 		_success "${_selected_service} Started"
-    systemd_menu
+    unset $l0
 	}
 
 # Restart systemd service
@@ -60,7 +59,7 @@
 		_header "Restarting ${_selected_service}"
 		sudo systemctl restart ${_selected_service}
 		_success "${_selected_service} Restarted"
-    systemd_menu
+    unset $l0
 	}
 
 # Reload systemd daemon
@@ -68,5 +67,4 @@
 		_header "Reloading systemd daemon"
 		sudo systemctl daemon-reload
 		_success "systemd daemon reloaded"
-    systemd_menu
 	}
