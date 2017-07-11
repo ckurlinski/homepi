@@ -1,6 +1,7 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 # systemd service name
+	unset ${sysd_name}
 	sysd_name="homebridge"
 #------------------------------------------------------------------------------#
 # base directory
@@ -41,7 +42,7 @@
 #------------------------------------------------------------------------------#
 # HomeBridge Node Name
 	_hb_node_name() {
-		_header "Enter name for instance"
+		_header "Enter name for ${sysd_name}"
 		read _ans
 		_ans_check
 		hb_node_name="${_ans}"

@@ -18,6 +18,7 @@
 	npm_start_cmd="npm start --prefix ${git_node_dir}/${sysd_name}"
 #------------------------------------------------------------------------------#
 # systemd service name
+	unset ${sysd_name}
 	sysd_name="${git_node_name}"
 #------------------------------------------------------------------------------#
 # Main PoolController installer
