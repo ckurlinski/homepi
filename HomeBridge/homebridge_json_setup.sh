@@ -1,26 +1,5 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# base json config
-	hb_config_list=(
-		"{"
-		"\"bridge\" : {"
-		"\"username\" : \"hb_user_id\","
-		"\"name\" : \"hb_node_name\","
-		"\"pin\" : \"hb_pin_code\","
-		"\"port\" : \"hb_random_port\""
-		"},"
-		"\"platforms\" : ["
-		"{"
-		"\"port\" : \"hb_server_port\","
-		"\"restart\" : \"sudo systemctl restart hb_name\","
-		"\"name\" : \"hb_node_man\","
-		"\"log\" : \"systemd\","
-		"\"platform\" : \"hb_name Server\""
-		"}"
-		"]"
-		"}"
-	)
-#------------------------------------------------------------------------------#
 # set systemd name
 	_hb_sysd_name() {
 		sysd_name="${hb_name}"
