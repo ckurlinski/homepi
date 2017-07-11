@@ -1,9 +1,9 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 # Script sources
-source config/base.conf
-source config/systemd.conf
-source config/poolcontroller.conf
+#source system/base.conf
+#source systemd/systemd.conf
+#source PoolController/poolcontroller.conf
 #------------------------------------------------------------------------------#
 # nodejs_poolController Installation
 _pool_controller_service_install() {
