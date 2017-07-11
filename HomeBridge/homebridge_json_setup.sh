@@ -4,7 +4,7 @@
 	hb_base_dir="/var/lib/${sysd_name}"
 #------------------------------------------------------------------------------#
 # Temp config
-	hb_config_tmp="config.raw"
+	hb_config_tmp="${hb_base_dir}/config.raw"
 #------------------------------------------------------------------------------#
 # Default config.json path
 	hb_config_json="${hb_base_dir}/config.json"
