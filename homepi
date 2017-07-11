@@ -55,6 +55,7 @@ homebridge_menu()  {
 			l0=(
 				"Install systemd Homebridge service files"
         "Homebridge Configuration Install"
+        "Install HomeBridge systemd services"
 				"Return"
 			)
 	## Map Menu to command Array
@@ -62,6 +63,7 @@ homebridge_menu()  {
 			opt0=(
 				'_hb_install_main'
         '_hb_config_install'
+        '_homebridge_service_install'
 				'main_menu'
 				)
 	## Execute Menu Function
