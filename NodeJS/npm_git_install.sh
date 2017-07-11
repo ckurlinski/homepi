@@ -10,14 +10,14 @@
 				git clone ${git_repo}
 				cd ${git_name}
 			_sep
-			_sucess "$(cat LICENSE)"
+			_success "$(cat LICENSE)"
 			_sep
 			_note "Hit the Any Key to continue....."
 				read huh
 		else
 				cd ${git_name}
 			_sep
-			_sucess "$(cat LICENSE)"
+			_success "$(cat LICENSE)"
 			_sep
 			_note "Hit the Any Key to continue....."
 				read huh
@@ -26,7 +26,7 @@
 #------------------------------------------------------------------------------#
 # Git checkout branch
   _get_branch() {
-		_header "Entering global node install directory: ${g_node_dir}/${git_name}"
+		_header "Entering global node install directory: ${g_mod_dir}/${git_name}"
 			cd ${g_mod_dir}/${git_name}
 		_success "$(pwd)"
 		_sep
