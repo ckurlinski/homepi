@@ -25,8 +25,8 @@
 			_success "homebridge"
 		## Create HomeBridge working directory
 			_header "Create HomeBridge Var Directory"
-				sudo mkdir -p ${_homebridge_base}
-			_success ${_homebridge_base}
+				sudo mkdir -p ${hb_base_dir}
+			_success ${hb_base_dir}
 	}
 #------------------------------------------------------------------------------#
 # Homebridge Install
