@@ -136,7 +136,6 @@ main_menu()  {
 				"System Menu"
 				"Install Homebridge"
 				"Install systemd Homebridge service files"
-				"Install HomeBridge config.json"
 				"Start HomeBridge services"
 				"Show HomeBridge Service Status"
 				"FAAC GPIO Door Opener"
@@ -151,7 +150,6 @@ main_menu()  {
 				'system_menu'
 				'_hb_install_main'
 				'_hb_config_install'
-				'_config_json_setup'
 				'_start_homebridge_fn'
 				'_sysd_service_status'
 				'_faac_install'
