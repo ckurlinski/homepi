@@ -131,6 +131,11 @@ source HomeBridge/homebridge.conf
 	_hb_config_install() {
 		# HomeBridge Node Name
 			_hb_sysd_name
+			_sep
+			_note "${sysd_name}"
+			_sep
+		# Create config temp file
+			_hb_config_json_setup
 		# HomeBridge Node Name
 			_hb_node_name
 		# HomeBridge Node Manufacturer
@@ -143,8 +148,6 @@ source HomeBridge/homebridge.conf
 			_hb_server_port
 		# Create randon pin
 			_hb_pin_code
-		# Create config temp file
-			_hb_config_json_setup
 		# Create config.json file
 			_hb_config_json_install
 		# Change ownership on HomeBridge config folder and children
