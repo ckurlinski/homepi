@@ -6,8 +6,8 @@
 		_header "Enter name for instance"
 		read _ans
 		_ans_check
-		hb_node_name_var="${_ans}"
-		_success "${hb_node_name_var}"
+		hb_node_name="${_ans}"
+		_success "${hb_node_name}"
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Description
@@ -15,8 +15,8 @@
 		_header "Enter description for ${sysd_name} Node"
 		read _ans
 		_ans_check
-		hb_node_desc_var="${_ans}"
-		_success "${hb_node_desc_var}"
+		hb_node_desc="${_ans}"
+		_success "${hb_node_desc}"
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Manufacturer
@@ -24,8 +24,8 @@
 		_header "Enter Manufacturer for ${sysd_name} Node"
 		read _ans
 		_ans_check
-		hb_node_man_var="${_ans}"
-		_success "${hb_node_man_var}"
+		hb_node_man="${_ans}"
+		_success "${hb_node_man}"
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Device Name
@@ -33,8 +33,8 @@
 		_header "Enter Device ${sysd_name} Name for Node"
 		read _ans
 		_ans_check
-		hb_node_device_name_var="${_ans}"
-		_success "${hb_node_device_name_var}"
+		hb_node_device_name="${_ans}"
+		_success "${hb_node_device_name}"
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random User ID
@@ -54,27 +54,27 @@
 			octetb=`echo "obase=16;$numbera" | bc`
 			octetc=`echo "obase=16;$numberb" | bc`
 		## Show Homebridge User Name
-			hb_user_id_var="${octets}:${octeta}:${octetb}:${octetc}"
+			hb_user_id="${octets}:${octeta}:${octetb}:${octetc}"
 			_header "Generating ${sysd_name} Usename"
-			_warning ${hb_user_id_var}
+			_warning ${hb_user_id}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random Port generator
 	_hb_random_port() {
 		## Generate random port
-			hb_random_port_var=(`shuf -i 40000-65000 -n 1`)
+			hb_random_port=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
 			_header "${sysd_name} - Randomizing port"
-			_warning ${hb_random_port_var}
+			_warning ${hb_random_port}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Server Random Port generator
 	_hb_server_port() {
 		## Generate random port
-			hb_server_port_var=(`shuf -i 40000-65000 -n 1`)
+			hb_server_port=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
 			_header "${sysd_name} - Randomizing port"
-			_warning ${hb_server_port_var}
+			_warning ${hb_server_port}
 	}
 #------------------------------------------------------------------------------#
 # Random access code generator
@@ -89,10 +89,10 @@
 			g=`echo $((1 + RANDOM % 9))`
 			h=`echo $((1 + RANDOM % 9))`
 		## Assemble and format numbers
-			hb_pin_code_var="${a}${b}${c}-${d}${e}-${f}${g}${h}"
+			hb_pin_code="${a}${b}${c}-${d}${e}-${f}${g}${h}"
 		## Show HomeBridge random pin
 			_header "Generating ${sysd_name} access code"
-			_warning ${hb_pin_code_var}
+			_warning ${hb_pin_code}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check
