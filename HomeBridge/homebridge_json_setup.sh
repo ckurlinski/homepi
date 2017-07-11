@@ -157,7 +157,7 @@
 			cat ${hb_config_tmp}
 			_sep
 			for i in "${hb_var_list[@]}"; do
-				a=$(echo $i | awk '{print"$"$0')
+				a=$(echo $i | awk '{print"$"$0}')
 				echo $i = $a
 				sed -i "s/$i/$a/g" ${hb_config_tmp}
 			done
