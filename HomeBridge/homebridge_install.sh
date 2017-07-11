@@ -1,5 +1,8 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+# Script source
+	source HomeBridge/homebridge.conf
+#------------------------------------------------------------------------------#
 # HomeBridge Install Dependencies
 	_hb_depends_install() {
 		_system_depends_install

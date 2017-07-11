@@ -1,7 +1,7 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 # Script sources
-source PoolController/poolcontroller.conf
+  source PoolController/poolcontroller.conf
 #------------------------------------------------------------------------------#
 # Main PoolController installer
 _pool_controller_install() {

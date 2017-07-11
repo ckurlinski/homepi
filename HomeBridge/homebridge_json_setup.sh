@@ -1,7 +1,7 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 # Script source
-source HomeBridge/homebridge.conf
+	source HomeBridge/homebridge.conf
 #------------------------------------------------------------------------------#
 # HomeBridge Node Name
 	_hb_node_name() {
