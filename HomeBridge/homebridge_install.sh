@@ -1,5 +1,12 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+# set systemd name
+	_hb_sysd_name() {
+		sysd_name="homebridge"
+	}
+# HomeBridge Node Name
+	_hb_sysd_name
+#------------------------------------------------------------------------------#
 # base directory
 	hb_base_dir="/var/lib/${sysd_name}"
 #------------------------------------------------------------------------------#
@@ -14,11 +21,6 @@
 		homebridge
 		homebridge-server
 	)
-#------------------------------------------------------------------------------#
-# set systemd name
-	_hb_sysd_name() {
-		sysd_name="homebridge"
-	}
 #------------------------------------------------------------------------------#
 # HomeBridge Install Dependencies
 	_hb_depends_install() {
@@ -51,7 +53,6 @@
 #------------------------------------------------------------------------------#
 # Homebridge Install
 	_hb_install_main() {
-		_hb_sysd_name
 		_hb_depends_install
 		_hb_user_setup
 		_hb_install
