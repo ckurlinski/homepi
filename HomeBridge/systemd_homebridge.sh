@@ -8,8 +8,10 @@
 #------------------------------------------------------------------------------#
 # HomeBridge systemd service Installation
 _homebridge_service_install() {
+  _hb_sysd_set_var
   _sep
-  _note "${hb_name}"
+  _warning "${sysd_name}"
+  _warning "${hb_base_dir}"
   _sep
 	_hb_sysd_set_var
   _service_cap_name
