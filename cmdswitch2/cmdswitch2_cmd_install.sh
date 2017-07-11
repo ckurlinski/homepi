@@ -11,6 +11,11 @@ _cmd2_script_dir() {
     _header "Creating new ${script_cmd_dir}"
       sudo mkdir ${script_cmd_dir}
     _sep
+  else
+    _header "Creating new ${script_cmd_dir}"
+      sudo mkdir ${script_cmd_dir}
+    _sep
+  fi
 }
 #------------------------------------------------------------------------------#
 # Generate cmdswitch2 script from ${_list0} array
