@@ -10,8 +10,10 @@
 _homebridge_service_install() {
   _hb_sysd_set_var
   _sep
-  _warning "${sysd_name}"
-  _warning "${hb_base_dir}"
+  _success "${sysd_name}"
+  _success "${hb_base_dir}"
+  _success "${sysd_service_file}"
+  _success "${sysd_default_file}"
   _sep
 	_hb_sysd_set_var
   _service_cap_name
