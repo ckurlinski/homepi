@@ -89,7 +89,7 @@ systemd_menu()  {
 	## Map Menu to command Array
 		### Use Single Quotes for Commands
 			opt0=(
-				'_systemd_service_status'
+				'_sysd_service_status'
         '_sysd_service_restart'
         '_sysd_service_enable'
         '_sysd_service_disable'
@@ -153,7 +153,7 @@ main_menu()  {
 				'_homebridge_defaults_setup'
 				'_config_json_setup'
 				'_start_homebridge_fn'
-				'_service_status'
+				'_sysd_service_status'
 				'_faac_install'
 				'_node_extras_setup'
 				'pool_menu'
