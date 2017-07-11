@@ -138,7 +138,7 @@
 		## Create the json config file
 			_header "Creating tmp config : ${hb_config_tmp}"
 			for i in "${hb_config_list[@]}"; do
-				sudo echo $i >> ${hb_config_tmp}
+				echo $i >> ${hb_config_tmp}
 			done
 			_success "Created tmp config : ${hb_config_tmp}"
 			_sep
