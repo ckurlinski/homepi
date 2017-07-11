@@ -8,12 +8,23 @@
     _selected_service=${_list_output}
   }
 
+# systemd service status check
+  _sysd_service_status_test() {
+    sysd_check=(`systemctl status ${_selected_service} | grep Active | awk '{print$2}'`)
+    if [[ ${sysd_check} == "inactive"]]; then
+      _warning "${_selected_service} is stopped"
+    else
+      _success "${_selected_service} Running....."
+      systemctl status -l ${_selected_service}
+      _sep
+    fi
+  }
+
 # Show systemd service status
 	_sysd_service_status() {
     _sysd_service_select
 		_header "${_selected_service} Status"
-		sudo systemctl status -l ${_selected_service}
-		_success "${_selected_service} Running....."
+		_sysd_service_status_test
 	}
 
 # Enable systemd service
