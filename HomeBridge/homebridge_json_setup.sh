@@ -1,5 +1,4 @@
 #!/bin/bash
-source HomeBridge/homebridge.conf
 #------------------------------------------------------------------------------#
 # base json config
 	hb_config_list=(
