@@ -1,4 +1,5 @@
 #!/bin/bash
+source HomeBridge/homebridge.conf
 #------------------------------------------------------------------------------#
 # set systemd name
 	_hb_sysd_name() {

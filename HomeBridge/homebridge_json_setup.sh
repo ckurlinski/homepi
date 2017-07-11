@@ -1,4 +1,5 @@
 #!/bin/bash
+source HomeBridge/homebridge.conf
 #------------------------------------------------------------------------------#
 # set systemd name
 	_hb_sysd_name() {
@@ -12,15 +13,6 @@
 		_ans_check
 		hb_node_name="${_ans}"
 		_success "${hb_node_name}"
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge Node Description
-	_hb_node_desc() {
-		_header "Enter description for ${sysd_name} Node"
-		read _ans
-		_ans_check
-		hb_node_desc="${_ans}"
-		_success "${hb_node_desc}"
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Manufacturer
@@ -145,8 +137,6 @@
 			_hb_node_desc
 		# HomeBridge Node Manufacturer
 			_hb_node_man
-		# HomeBridge Node Device Name
-			_hb_node_device_name
 		# Create Random Username
 			_hb_user_id
 		# Create random Port
