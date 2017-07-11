@@ -1,8 +1,9 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 # set systemd name
-	_hb_sysd_name() {
+	_hb_sysd_set_var() {
 		sysd_name="${hb_name}"
+		git_node_dir"${hb_base_dir}"
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check
@@ -55,12 +56,9 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
-# HomeBridge Node Manufacturer
+# HomeBridge Server Name
 	_hb_node_man() {
-		_header "Enter Manufacturer for ${sysd_name} Node"
-		read _ans
-		_ans_check
-		hb_node_man="${_ans}"
+		hb_node_man="${hb_name} Server"
 		_success "${hb_node_man}"
 		# Update config.raw
 		_note "Updating config.raw - hb_node_man : ${hb_node_man}"
@@ -165,7 +163,7 @@
 # Homebridge Create json config
 	_hb_config_install() {
 		# HomeBridge Node Name
-			_hb_sysd_name
+			_hb_sysd_set_var
 			_sep
 			_note "${sysd_name}"
 			_sep

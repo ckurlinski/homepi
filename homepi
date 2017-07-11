@@ -46,6 +46,28 @@ source_sh_scripts() {
 # Set Sources
   source incl.sh
 #------------------------------------------------------------------------------#
+# HomeBridge Menu
+homebridge_menu()  {
+	## Header
+		HEADING="Homebridge Menu"
+	## Write out the menu options array
+		### Use Double Quotes for Text
+			l0=(
+				"Install systemd Homebridge service files"
+        "Homebridge Configuration Install"
+				"Return"
+			)
+	## Map Menu to command Array
+		### Use Single Quotes for Commands
+			opt0=(
+				'_hb_install_main'
+        '_hb_config_install'
+				'main_menu'
+				)
+	## Execute Menu Function
+		_g_menu_fn
+}
+#------------------------------------------------------------------------------#
 # Pool Menu
 pool_menu()  {
 	## Header
@@ -53,8 +75,7 @@ pool_menu()  {
 	## Write out the menu options array
 		### Use Double Quotes for Text
 			l0=(
-				"nodejs-poolController install"
-				"fix executable"
+				"Nodejs-poolController install"
 				"nodejs-poolController service setup"
 				"Return"
 			)
@@ -62,7 +83,6 @@ pool_menu()  {
 		### Use Single Quotes for Commands
 			opt0=(
 				'_pool_controller_install'
-				'_git_create_executable'
 				'_pool_controller_service_install'
 				'main_menu'
 				)
@@ -77,13 +97,13 @@ systemd_menu()  {
 	## Write out the menu options array
 		### Use Double Quotes for Text
 			l0=(
-				"systemd service status"
-        "systemd service restart"
-        "systemd service enable"
-        "systemd service disable"
-        "systemd service start"
-        "systemd service stop"
-        "systemd daemon reload"
+				"service status"
+        "restart service"
+        "enable service"
+        "disable service"
+        "start service"
+        "stop service"
+        "daemon reload"
 				"Return"
 			)
 	## Map Menu to command Array
@@ -134,11 +154,7 @@ main_menu()  {
 		### Use Double Quotes for Text
 			l0=(
 				"System Menu"
-				"Install Homebridge"
-				"Install systemd Homebridge service files"
-				"Start HomeBridge services"
-				"Show HomeBridge Service Status"
-				"FAAC GPIO Door Opener"
+				"Homebridge Menu"
 				"npm extra installations"
 				"Pool PI Menu"
 				"systemd Service Management"
@@ -148,11 +164,7 @@ main_menu()  {
 		### Use Single Quotes for Commands
 			opt0=(
 				'system_menu'
-				'_hb_install_main'
-				'_hb_config_install'
-				'_start_homebridge_fn'
-				'_sysd_service_status'
-				'_faac_install'
+				'homebridge_menu'
 				'_node_extras_setup'
 				'pool_menu'
 				'systemd_menu'
