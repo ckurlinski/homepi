@@ -5,9 +5,16 @@
 	_su_test() {
 		# Script must be run as root
 		if [ "$EUID" -ne 0 ]; then
+			_sep
 			_error "Permissions issue"
-			_note "Please run as root or with sudo"
-			exit
+			_note "If running as root, all installations and services must run as root"
+			_sep
+		else
+			_sep
+			_note "Setting npm global user:group to ${g_user}:${g_group}"
+				sudo chown -R ${g_user}:${g_group} ${g_node_dir}/{lib/node_modules,bin,share}
+			_warn "Running scripts as ${g_user}:${g_group}"
+			_sep
 		fi
 	}
 #------------------------------------------------------------------------------#
