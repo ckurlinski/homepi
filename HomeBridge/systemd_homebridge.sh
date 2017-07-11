@@ -4,6 +4,8 @@
   _hb_sysd_set_var() {
     sysd_name="${hb_name}"
     git_node_dir="${hb_base_dir}"
+    sysd_service_file="/etc/systemd/system/${sysd_name}.service"
+    sysd_default_file="/etc/default/${sysd_service}"
   }
 #------------------------------------------------------------------------------#
 # HomeBridge systemd service Installation
