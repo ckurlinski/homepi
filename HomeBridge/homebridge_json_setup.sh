@@ -4,21 +4,33 @@
 	hb_config_list=(
 		"{"
 		"\"bridge\" : {"
-		"\"username\" : \"$hb_user_id\","
-		"\"name\" : \"${hb_node_name}\","
-		"\"pin\" : \"${hb_pin_code}\","
-		"\"port\" : \"${hb_random_port}\""
+		"\"username\" : \"hb_user_id\","
+		"\"name\" : \"hb_node_name\","
+		"\"pin\" : \"hb_pin_code\","
+		"\"port\" : \"hb_random_port\""
 		"},"
 		"\"platforms\" : ["
 		"{"
-		"\"port\" : \"${hb_server_port}\","
-		"\"restart\" : \"sudo systemctl restart ${hb_name}\","
-		"\"name\" : \"${hb_node_man}\","
+		"\"port\" : \"hb_server_port\","
+		"\"restart\" : \"sudo systemctl restart hb_name\","
+		"\"name\" : \"hb_node_man\","
 		"\"log\" : \"systemd\","
-		"\"platform\" : \"${hb_name} Server\""
+		"\"platform\" : \"hb_name Server\""
 		"}"
 		"]"
 		"}"
+	)
+#------------------------------------------------------------------------------#
+# Homebridge variable config list
+	_hb_var_list=(
+		hb_user_id
+		hb_node_name
+		hb_pin_code
+		hb_random_port
+		hb_server_port
+		hb_name
+		hb_node_man
+		hb_name
 	)
 #------------------------------------------------------------------------------#
 # set systemd name
@@ -144,6 +156,10 @@
 			_sep
 			cat ${hb_config_tmp}
 			_sep
+			for i in "${_hb_var_list[@]}"; do
+				sed -i 's/$i/\${$i}/g'
+			done
+			cat ${hb_config_tmp}
 			_header "Preforming cleanup - ${hb_config_tmp} to ${hb_config_json}"
 			sudo cat ${hb_config_tmp} | python -m json.tool > ${hb_config_json}
 			cat ${hb_config_json}
