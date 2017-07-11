@@ -24,7 +24,6 @@
 # set systemd name
 	_hb_sysd_name() {
 		sysd_name="${hb_name}"
-		sed -i "s/hb_name/${hb_name}/g" ${hb_config_tmp}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check
@@ -68,7 +67,13 @@
 		_ans_check
 		hb_node_name="${_ans}"
 		_success "${hb_node_name}"
-		sed -i "s/hb_node_name/${hb_node_name}/g" ${hb_config_tmp}
+		# Update config.raw
+		_note "Updating config.raw - hb_name : ${hb_name}"
+			sed -i "s/hb_name/${hb_name}/g" ${hb_config_tmp}
+		_sep
+		_note "Updating config.raw - hb_node_name : ${hb_node_name}"
+			sed -i "s/hb_node_name/${hb_node_name}/g" ${hb_config_tmp}
+		_sep
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Manufacturer
@@ -78,22 +83,28 @@
 		_ans_check
 		hb_node_man="${_ans}"
 		_success "${hb_node_man}"
-		sed -i "s/hb_node_man/${hb_node_man}/g" ${hb_config_tmp}
+		# Update config.raw
+		_note "Updating config.raw - hb_node_man : ${hb_node_man}"
+			sed -i "s/hb_node_man/${hb_node_man}/g" ${hb_config_tmp}
+		_sep
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Device Name
 	_hb_node_device_name() {
 		_header "Enter Device ${sysd_name} Name for Node"
-		read _ans
+			read _ans
 		_ans_check
-		hb_node_device_name="${_ans}"
+			hb_node_device_name="${_ans}"
 		_success "${hb_node_device_name}"
-		sed -i "s/hb_node_device_name/${hb_node_device_name}/g" ${hb_config_tmp}
+		# Update config.raw
+		_note "Updating config.raw - hb_node_device_name : ${hb_node_device_name}"
+			sed -i "s/hb_node_device_name/${hb_node_device_name}/g" ${hb_config_tmp}
+		_sep
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random User ID
 	_hb_user_id() {
-		## Define random ranges
+		# Define random ranges
 			RANGE=255
 			number=$RANDOM
 			numbera=$RANDOM
@@ -101,37 +112,46 @@
 			let "number %= $RANGE"
 			let "numbera %= $RANGE"
 			let "numberb %= $RANGE"
-		## Base octet for file
+		# Base octet for file
 			octets='00:60:2F'
-		## Random base16 creation
+		# Random base16 creation
 			octeta=`echo "obase=16;$number" | bc`
 			octetb=`echo "obase=16;$numbera" | bc`
 			octetc=`echo "obase=16;$numberb" | bc`
-		## Show Homebridge User Name
+		# Show Homebridge User Name
 			hb_user_id="${octets}:${octeta}:${octetb}:${octetc}"
 			_header "Generating ${sysd_name} Usename"
 			_warning ${hb_user_id}
-		sed -i "s/hb_user_id/${hb_user_id}/g" ${hb_config_tmp}
+		# Update config.raw
+		_note "Updating config.raw - hb_user_id : ${hb_user_id}"
+			sed -i "s/hb_user_id/${hb_user_id}/g" ${hb_config_tmp}
+		_sep
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random Port generator
 	_hb_random_port() {
-		## Generate random port
+		# Generate random port
 			hb_random_port=(`shuf -i 40000-65000 -n 1`)
-		## Show random port
+		# Show random port
 			_header "${sysd_name} - Randomizing port"
 			_warning ${hb_random_port}
-		sed -i "s/hb_random_port/${hb_random_port}/g" ${hb_config_tmp}
+		# Update config.raw
+		_note "Updating config.raw - hb_random_port : ${hb_random_port}"
+			sed -i "s/hb_random_port/${hb_random_port}/g" ${hb_config_tmp}
+		_sep
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Server Random Port generator
 	_hb_server_port() {
-		## Generate random port
+		# Generate random port
 			hb_server_port=(`shuf -i 40000-65000 -n 1`)
-		## Show random port
+		# Show random port
 			_header "${sysd_name} - Randomizing port"
 			_warning ${hb_server_port}
-		sed -i "s/hb_server_port/${hb_server_port}" ${hb_config_tmp}
+		# Update config.raw
+			_note "Updating config.raw - hb_server_port : ${hb_server_port}"
+				sed -i "s/hb_server_port/${hb_server_port}/g" ${hb_config_tmp}
+			_sep
 	}
 #------------------------------------------------------------------------------#
 # Random access code generator
