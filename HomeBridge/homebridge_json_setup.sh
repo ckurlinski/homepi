@@ -14,6 +14,12 @@
 					sudo systemctl stop homebridge
 				_removed "Stopping ${sysd_name} Services - Done!"
 			fi
+		if [[ -d ${hb_config_tmp} ]]; then
+			sudo chown -R ${g_user}:${g_group} ${hb_base_dir}
+		else
+			sudo mkdir ${hb_base_dir}
+			sudo chown -R ${g_user}:${g_group} ${hb_base_dir}
+		fi
 		## Remove existing HomeBridge config.tmp
 			if [ -e ${hb_config_tmp} ]; then
 				_header "Removing" ${hb_config_tmp}
