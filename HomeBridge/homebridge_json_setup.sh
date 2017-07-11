@@ -4,18 +4,18 @@
 	hb_config_list=(
 		"{"
 		"\"bridge\" : {"
-		"\"username\" : \"hb_user_id\","
-		"\"name\" : \"hb_node_name\","
-		"\"pin\" : \"hb_pin_code\","
-		"\"port\" : \"hb_random_port\""
+		"\"username\" : \"${hb_user_id}\","
+		"\"name\" : \"${hb_node_name}\","
+		"\"pin\" : \"${hb_pin_code}\","
+		"\"port\" : \"${hb_random_port}\""
 		"},"
 		"\"platforms\" : ["
 		"{"
-		"\"port\" : \"hb_server_port\","
-		"\"restart\" : \"sudo systemctl restart hb_name\","
-		"\"name\" : \"hb_node_man\","
+		"\"port\" : \"${hb_server_port}\","
+		"\"restart\" : \"sudo systemctl restart ${hb_name}\","
+		"\"name\" : \"${hb_node_man}\","
 		"\"log\" : \"systemd\","
-		"\"platform\" : \"hb_name Server\""
+		"\"platform\" : \"${hb_name} Server\""
 		"}"
 		"]"
 		"}"
@@ -36,6 +36,18 @@
 # set systemd name
 	_hb_sysd_name() {
 		sysd_name="${hb_name}"
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge config.raw Create
+	_hb_config_json_tmp() {
+		## Create the json config file
+			_header "Creating tmp config : ${hb_config_tmp}"
+			for i in "${hb_config_list[@]}"; do
+				echo $i >> ${hb_config_tmp}
+			done
+			_success "Created tmp config : ${hb_config_tmp}"
+			_sep
+			cat ${hb_config_tmp}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Name
@@ -147,21 +159,6 @@
 #------------------------------------------------------------------------------#
 # HomeBridge config.json Create
 	_hb_config_json_install() {
-		## Create the json config file
-			_header "Creating tmp config : ${hb_config_tmp}"
-			for i in "${hb_config_list[@]}"; do
-				echo $i >> ${hb_config_tmp}
-			done
-			_success "Created tmp config : ${hb_config_tmp}"
-			_sep
-			cat ${hb_config_tmp}
-			_sep
-			for i in "${hb_var_list[@]}"; do
-				a=$(echo $i | awk '{print"$"$0}')
-				echo $i = $a
-				sed -i "s/$i/$a/g" ${hb_config_tmp}
-			done
-			cat ${hb_config_tmp}
 			_header "Preforming cleanup - ${hb_config_tmp} to ${hb_config_json}"
 			sudo cat ${hb_config_tmp} | python -m json.tool > ${hb_config_json}
 			cat ${hb_config_json}
@@ -177,8 +174,10 @@
 			_sep
 			_note "${sysd_name}"
 			_sep
-		# Create config temp file
+		# Setup config temp file
 			_hb_config_json_setup
+		# Create config.raw file
+			_hb_config_json_tmp
 		# HomeBridge Node Name
 			_hb_node_name
 		# HomeBridge Node Manufacturer
