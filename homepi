@@ -150,7 +150,7 @@ main_menu()  {
 			opt0=(
 				'system_menu'
 				'_hb_install_main'
-				'_homebridge_defaults_setup'
+				'_hb_config_install'
 				'_config_json_setup'
 				'_start_homebridge_fn'
 				'_sysd_service_status'

@@ -2,7 +2,7 @@
 
 #------------------------------------------------------------------------------#
 # HomeBridge Node Name
-	hb_node_name() {
+	_hb_node_name() {
 		_header "Enter name for instance"
 		read _ans
 		_ans_check
@@ -11,7 +11,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Description
-	hb_node_desc() {
+	_hb_node_desc() {
 		_header "Enter description for ${sysd_service} Node"
 		read _ans
 		_ans_check
@@ -20,7 +20,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Manufacturer
-	hb_node_man() {
+	_hb_node_man() {
 		_header "Enter Manufacturer for ${sysd_service} Node"
 		read _ans
 		_ans_check
@@ -29,7 +29,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Device Name
-	hb_node_device_name() {
+	_hb_node_device_name() {
 		_header "Enter Device ${sysd_service} Name for Node"
 		read _ans
 		_ans_check
@@ -38,7 +38,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random User ID
-	hb_user_id() {
+	_hb_user_id() {
 		## Define random ranges
 			RANGE=255
 			number=$RANDOM
@@ -60,7 +60,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random Port generator
-	hb_random_port() {
+	_hb_random_port() {
 		## Generate random port
 			hb_random_port_var=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
@@ -69,7 +69,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Server Random Port generator
-	hb_server_port() {
+	_hb_server_port() {
 		## Generate random port
 			hb_server_port_var=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
@@ -78,7 +78,7 @@
 	}
 #------------------------------------------------------------------------------#
 # Random access code generator
-	hb_pin_code() {
+	_hb_pin_code() {
 		## Generate (8) random numbers for HomeBridge pin
 			a=`echo $((1 + RANDOM % 9))`
 			b=`echo $((1 + RANDOM % 9))`
@@ -96,7 +96,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check
-	hb_config_json_setup() {
+	_hb_config_json_setup() {
 		## Stop existing HomeBridge service
 			if [ $(sudo ps -aux | grep -c '^${sysd_service}') = 1 ]; then
 				_header "Stopping ${sysd_service} Services"
@@ -118,7 +118,7 @@
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json Create
-	hb_config_json_install() {
+	_hb_config_json_install() {
 		## Create the json config file
 			_header "Creating tmp config : ${hb_config_tmp}"
 			for i in "${hb_config_list[@]}"; do
@@ -132,27 +132,27 @@
 	}
 #------------------------------------------------------------------------------#
 # Homebridge Create json config
-	hb_config_install() {
+	_hb_config_install() {
 		# HomeBridge Node Name
-			hb_node_name
+			_hb_node_name
 		# HomeBridge Node Description
-			hb_node_desc
+			_hb_node_desc
 		# HomeBridge Node Manufacturer
-			hb_node_man
+			_hb_node_man
 		# HomeBridge Node Device Name
-			hb_node_device_name
+			_hb_node_device_name
 		# Create Random Username
-			hb_user_id
+			_hb_user_id
 		# Create random Port
-			hb_random_port
+			_hb_random_port
 		# Create random Port
-			hb_server_port
+			_hb_server_port
 		# Create randon pin
-			hb_pin_code
+			_hb_pin_code
 		# Create config temp file
-			hb_config_json_install
+			_hb_config_json_install
 		# Create config.json file
-			hb_config_json_setup
+			_hb_config_json_setup
 		# Change ownership on HomeBridge config folder and children
 			_header "Changing ownership on ${hb_base_dir}"
 				sudo chown -R ${g_user}:${g_group} ${hb_base_dir}
