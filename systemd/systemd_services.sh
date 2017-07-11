@@ -3,7 +3,7 @@
 # Select service
 # list is defined in config/base.conf
   _sysd_service_select() {
-    _l0=(`echo ${sysd_service_list[@]}`)
+    _l0=(`echo ${sysd_service_monitor_list[@]}`)
     _list_template
     _selected_service=${_list_output}
   }
