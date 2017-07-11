@@ -2,25 +2,8 @@
 #------------------------------------------------------------------------------#
 # set systemd name
 	_hb_sysd_name() {
-		sysd_name="homebridge"
+		sysd_name="${hb_name}"
 	}
-# HomeBridge Node Name
-	_hb_sysd_name
-#------------------------------------------------------------------------------#
-# base directory
-	hb_base_dir="/var/lib/${sysd_name}"
-#------------------------------------------------------------------------------#
-# Temp config
-	hb_config_tmp="config.raw"
-#------------------------------------------------------------------------------#
-# Default config.json path
-	hb_config_json="${hb_base_dir}/config.json"
-#------------------------------------------------------------------------------#
-# HomeBridge install list
-	hb_install_list=(
-		homebridge
-		homebridge-server
-	)
 #------------------------------------------------------------------------------#
 # HomeBridge Install Dependencies
 	_hb_depends_install() {
@@ -53,6 +36,7 @@
 #------------------------------------------------------------------------------#
 # Homebridge Install
 	_hb_install_main() {
+		_hb_sysd_name
 		_hb_depends_install
 		_hb_user_setup
 		_hb_install
