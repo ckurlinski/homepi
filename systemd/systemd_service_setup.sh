@@ -2,23 +2,23 @@
 
 # Set systemd service to all caps
 	_service_cap_name() {
-		_header "Capitolizing systemd service name: ${sysd_service}"
-		str=${sysd_service}
+		_header "Capitolizing systemd service name: ${sysd_name}"
+		str=${sysd_name}
 			_all_caps
-		sysd_service_caps="${str_caps}"
-		_success "${sysd_service} -> ${sysd_service_caps}"
+		sysd_name_caps="${str_caps}"
+		_success "${sysd_name} -> ${sysd_name_caps}"
 		_sep
 	}
 
 # Existing System Service Check, Stop, and Removal
 	_sysd_services_remove() {
 		## Stop and disable existing services
-		if [ $(sudo ps -aux | grep -c '^${sysd_service}') = 1 ]; then
-			_header "Stopping and removing ${sysd_service} Services"
-			sudo systemctl stop ${sysd_service}
-			sudo systemctl disable ${sysd_service}
+		if [ $(sudo ps -aux | grep -c '^${sysd_name}') = 1 ]; then
+			_header "Stopping and removing ${sysd_name} Services"
+			sudo systemctl stop ${sysd_name}
+			sudo systemctl disable ${sysd_name}
 			sudo systemctl daemon-reload
-			_removed "Stopping and removing ${sysd_service} Services - Done!"
+			_removed "Stopping and removing ${sysd_name} Services - Done!"
 		fi
 		## Remove existing service file
 		if [ -e ${sysd_service_file} ]; then
@@ -84,7 +84,7 @@
 		_sysd_service_setup
 		_sysd_service_defaults_setup
 		_sysd_reload_daemon
-		_header "Starting ${sysd_service}"
-		sudo systemctl start ${sysd_service}
-		_success "${sysd_service} Started"
+		_header "Starting ${sysd_name}"
+		sudo systemctl start ${sysd_name}
+		_success "${sysd_name} Started"
 	}

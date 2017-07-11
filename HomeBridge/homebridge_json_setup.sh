@@ -12,7 +12,7 @@
 #------------------------------------------------------------------------------#
 # HomeBridge Node Description
 	_hb_node_desc() {
-		_header "Enter description for ${sysd_service} Node"
+		_header "Enter description for ${sysd_name} Node"
 		read _ans
 		_ans_check
 		hb_node_desc_var="${_ans}"
@@ -21,7 +21,7 @@
 #------------------------------------------------------------------------------#
 # HomeBridge Node Manufacturer
 	_hb_node_man() {
-		_header "Enter Manufacturer for ${sysd_service} Node"
+		_header "Enter Manufacturer for ${sysd_name} Node"
 		read _ans
 		_ans_check
 		hb_node_man_var="${_ans}"
@@ -30,7 +30,7 @@
 #------------------------------------------------------------------------------#
 # HomeBridge Node Device Name
 	_hb_node_device_name() {
-		_header "Enter Device ${sysd_service} Name for Node"
+		_header "Enter Device ${sysd_name} Name for Node"
 		read _ans
 		_ans_check
 		hb_node_device_name_var="${_ans}"
@@ -55,8 +55,8 @@
 			octetc=`echo "obase=16;$numberb" | bc`
 		## Show Homebridge User Name
 			hb_user_id_var="${octets}:${octeta}:${octetb}:${octetc}"
-			_header "Generating ${sysd_service} Usename"
-			_warninging ${hb_user_id_var}
+			_header "Generating ${sysd_name} Usename"
+			_warning ${hb_user_id_var}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random Port generator
@@ -64,8 +64,8 @@
 		## Generate random port
 			hb_random_port_var=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
-			_header "${sysd_service} - Randomizing port"
-			_warninging ${hb_random_port_var}
+			_header "${sysd_name} - Randomizing port"
+			_warning ${hb_random_port_var}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Server Random Port generator
@@ -73,8 +73,8 @@
 		## Generate random port
 			hb_server_port_var=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
-			_header "${sysd_service} - Randomizing port"
-			_warninging ${hb_server_port_var}
+			_header "${sysd_name} - Randomizing port"
+			_warning ${hb_server_port_var}
 	}
 #------------------------------------------------------------------------------#
 # Random access code generator
@@ -91,17 +91,17 @@
 		## Assemble and format numbers
 			hb_pin_code_var="${a}${b}${c}-${d}${e}-${f}${g}${h}"
 		## Show HomeBridge random pin
-			_header "Generating ${sysd_service} access code"
-			_warninging ${hb_pin_code_var}
+			_header "Generating ${sysd_name} access code"
+			_warning ${hb_pin_code_var}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check
 	_hb_config_json_setup() {
 		## Stop existing HomeBridge service
-			if [ $(sudo ps -aux | grep -c '^${sysd_service}') = 1 ]; then
-				_header "Stopping ${sysd_service} Services"
+			if [ $(sudo ps -aux | grep -c '^${sysd_name}') = 1 ]; then
+				_header "Stopping ${sysd_name} Services"
 					sudo systemctl stop homebridge
-				_removed "Stopping ${sysd_service} Services - Done!"
+				_removed "Stopping ${sysd_name} Services - Done!"
 			fi
 		## Remove existing HomeBridge config.tmp
 			if [ -e ${hb_config_tmp} ]; then
@@ -125,10 +125,10 @@
 				sudo echo $i >> ${hb_config_tmp}
 			done
 			_success "Created tmp config : ${hb_config_tmp}"
-			_header "Preforming cleanup - ${hb_config_tmp} to ${hb_json}"
-			sudo cat ${hb_config_tmp} | python -m json.tool > ${hb_json}
+			_header "Preforming cleanup - ${hb_config_tmp} to ${hb_config_json}"
+			sudo cat ${hb_config_tmp} | python -m json.tool > ${hb_config_json}
 			sudo rm -rf ${hb_config_tmp}
-			_success "Created ${hb_json}"
+			_success "Created ${hb_config_json}"
 	}
 #------------------------------------------------------------------------------#
 # Homebridge Create json config
