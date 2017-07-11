@@ -16,5 +16,7 @@
 			_header "Adding ${g_user} to the gpio group"
 				sudo usermod -G gpio ${g_user}
 			_success "Added ${g_user} to the gpio group"
+		else
+			_success "User ${g_user} is already member of gpio group"
 		fi
 	}
