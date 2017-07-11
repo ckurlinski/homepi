@@ -1,9 +1,5 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# systemd service name
-	sysd_name=""
-	sysd_name="homebridge"
-#------------------------------------------------------------------------------#
 # base directory
 	hb_base_dir="/var/lib/${sysd_name}"
 #------------------------------------------------------------------------------#
@@ -39,6 +35,11 @@
 		"]"
 		"}"
 	)
+#------------------------------------------------------------------------------#
+# set systemd name
+	_hb_sysd_name() {
+		sysd_name="homebridge"
+	}
 #------------------------------------------------------------------------------#
 # HomeBridge Node Name
 	_hb_node_name() {
@@ -172,6 +173,8 @@
 #------------------------------------------------------------------------------#
 # Homebridge Create json config
 	_hb_config_install() {
+		# HomeBridge Node Name
+			_hb_sysd_name
 		# HomeBridge Node Name
 			_hb_node_name
 		# HomeBridge Node Description
