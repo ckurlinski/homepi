@@ -121,9 +121,14 @@ source HomeBridge/homebridge.conf
 				sudo echo $i >> ${hb_config_tmp}
 			done
 			_success "Created tmp config : ${hb_config_tmp}"
+			_sep
+			cat ${hb_config_tmp}
+			_sep
 			_header "Preforming cleanup - ${hb_config_tmp} to ${hb_config_json}"
 			sudo cat ${hb_config_tmp} | python -m json.tool > ${hb_config_json}
-			sudo rm -rf ${hb_config_tmp}
+			cat ${hb_config_json}
+			_sep
+			#sudo rm -rf ${hb_config_tmp}
 			_success "Created ${hb_config_json}"
 	}
 #------------------------------------------------------------------------------#
