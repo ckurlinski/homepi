@@ -22,7 +22,7 @@
 	)
 #------------------------------------------------------------------------------#
 # Homebridge variable config list
-	_hb_var_list=(
+	hb_var_list=(
 		hb_user_id
 		hb_node_name
 		hb_pin_code
@@ -156,8 +156,9 @@
 			_sep
 			cat ${hb_config_tmp}
 			_sep
-			for i in "${_hb_var_list[@]}"; do
-				sed -i 's/$i/\${$i}/g'
+			for i in "${hb_var_list[@]}"; do
+				a=$(echo $i | awk '{print"\$"$0}')
+				echo $i = $a
 			done
 			cat ${hb_config_tmp}
 			_header "Preforming cleanup - ${hb_config_tmp} to ${hb_config_json}"
