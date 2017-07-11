@@ -133,8 +133,6 @@ source HomeBridge/homebridge.conf
 			_hb_sysd_name
 		# HomeBridge Node Name
 			_hb_node_name
-		# HomeBridge Node Description
-			_hb_node_desc
 		# HomeBridge Node Manufacturer
 			_hb_node_man
 		# Create Random Username
@@ -146,9 +144,9 @@ source HomeBridge/homebridge.conf
 		# Create randon pin
 			_hb_pin_code
 		# Create config temp file
-			_hb_config_json_install
-		# Create config.json file
 			_hb_config_json_setup
+		# Create config.json file
+			_hb_config_json_install
 		# Change ownership on HomeBridge config folder and children
 			_header "Changing ownership on ${hb_base_dir}"
 				sudo chown -R ${g_user}:${g_group} ${hb_base_dir}
