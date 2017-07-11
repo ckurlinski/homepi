@@ -5,7 +5,7 @@
 # pass var script_cmd_dir
 _cmd2_script_dir() {
   if [[ -d ${script_cmd_dir} ]]; then
-    _warn "Directory exists: Removing"
+    _warning "Directory exists: Removing"
       sudo rm -rf ${script_cmd_dir}
     _sep
     _header "Creating new ${script_cmd_dir}"

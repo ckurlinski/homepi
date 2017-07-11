@@ -56,7 +56,7 @@
 		## Show Homebridge User Name
 			hb_user_id_var="${octets}:${octeta}:${octetb}:${octetc}"
 			_header "Generating ${sysd_service} Usename"
-			_warning ${hb_user_id_var}
+			_warninging ${hb_user_id_var}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Random Port generator
@@ -65,7 +65,7 @@
 			hb_random_port_var=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
 			_header "${sysd_service} - Randomizing port"
-			_warning ${hb_random_port_var}
+			_warninging ${hb_random_port_var}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge Server Random Port generator
@@ -74,7 +74,7 @@
 			hb_server_port_var=(`shuf -i 40000-65000 -n 1`)
 		## Show random port
 			_header "${sysd_service} - Randomizing port"
-			_warning ${hb_server_port_var}
+			_warninging ${hb_server_port_var}
 	}
 #------------------------------------------------------------------------------#
 # Random access code generator
@@ -92,7 +92,7 @@
 			hb_pin_code_var="${a}${b}${c}-${d}${e}-${f}${g}${h}"
 		## Show HomeBridge random pin
 			_header "Generating ${sysd_service} access code"
-			_warning ${hb_pin_code_var}
+			_warninging ${hb_pin_code_var}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check
