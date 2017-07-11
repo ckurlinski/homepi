@@ -65,7 +65,7 @@
 			printf "${green}✖ %s${reset}\n" "$@"
 		}
 	## Warning
-		_warninging() {
+		_warning() {
 			printf "${yellow}➜ %s${reset}\n" "$@"
 		}
 	## Note
