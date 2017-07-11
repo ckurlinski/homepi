@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------#
 # Make script_cmd_dir Directory
 # pass var script_cmd_dir
-_cmd2_script_dir () {
+_cmd2_script_dir() {
   if [[ -d ${script_cmd_dir} ]]; then
     _warn "Directory exists: Removing"
       sudo rm -rf ${script_cmd_dir}
@@ -15,7 +15,7 @@ _cmd2_script_dir () {
 #------------------------------------------------------------------------------#
 # Generate cmdswitch2 script from ${_list0} array
 # pass var _cmd_script
-_cmd2_scripts_gen () {
+_cmd2_scripts_gen() {
     _header "Installing scripts : ${script_cmd_dir}/${_cmd_script}"
     for i in "${_list0[@]}"; do
       sudo echo $i >> ${script_cmd_dir}/${_cmd_script}
