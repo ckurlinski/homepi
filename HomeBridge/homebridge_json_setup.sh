@@ -3,7 +3,7 @@
 # set systemd name
 	_hb_sysd_set_var() {
 		sysd_name="${hb_name}"
-		git_node_dir"${hb_base_dir}"
+		git_node_dir="${hb_base_dir}"
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check

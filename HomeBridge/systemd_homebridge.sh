@@ -3,11 +3,14 @@
 # systemd vars
   _hb_sysd_set_var() {
     sysd_name="${hb_name}"
-    git_node_dir"${hb_base_dir}"
+    git_node_dir="${hb_base_dir}"
   }
 #------------------------------------------------------------------------------#
 # HomeBridge systemd service Installation
 _homebridge_service_install() {
+  _sep
+  _note "${hb_name}"
+  _sep
 	_hb_sysd_set_var
   _service_cap_name
   _sysd_services_remove
