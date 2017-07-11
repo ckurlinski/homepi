@@ -149,7 +149,7 @@ main_menu()  {
 		### Use Single Quotes for Commands
 			opt0=(
 				'system_menu'
-				'_install_homebridge_main'
+				'_hb_install_main'
 				'_homebridge_defaults_setup'
 				'_config_json_setup'
 				'_start_homebridge_fn'

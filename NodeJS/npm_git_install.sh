@@ -65,6 +65,6 @@
 	_npm_create_sysd_exec() {
 			_header "Creating symbolic link"
 			_note "${g_cmd_path} to ${sysd_cmd_path}"
-			update-alternatives --install "${sysd_cmd_path}" "${sysd_service}" "${g_cmd_path}" 1
+			sudo update-alternatives --install "${sysd_cmd_path}" "${sysd_service}" "${g_cmd_path}" 1
 			_success "${sysd_service}"
 	}
