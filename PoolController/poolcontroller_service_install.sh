@@ -18,6 +18,7 @@
 	npm_start_cmd="npm start --prefix ${git_node_dir}/${sysd_name}"
 #------------------------------------------------------------------------------#
 # systemd service name
+	sysd_name=""
 	sysd_name="${git_node_name}"
 #------------------------------------------------------------------------------#
 # nodejs_poolController Installation
