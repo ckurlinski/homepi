@@ -1,80 +1,90 @@
 #!/bin/bash
 
+# Set systemd service to all caps
+	_service_cap_name() {
+		_header "Capitolizing systemd service name: ${sysd_service}"
+		str=${sysd_service}
+			_all_caps
+		sysd_service_caps="${str_caps}"
+		_success "${sysd_service} -> ${sysd_service_caps}"
+		_sep
+	}
+
 # Existing System Service Check, Stop, and Removal
-	_systemd_services_remove() {
+	_sysd_services_remove() {
 		## Stop and disable existing services
-		if [ $(sudo ps -aux | grep -c '^${_systemd_service_name}') = 1 ]; then
-			_header "Stopping and removing ${_systemd_service_name} Services"
-			sudo systemctl stop ${_systemd_service_name}
-			sudo systemctl disable ${_systemd_service_name}
+		if [ $(sudo ps -aux | grep -c '^${sysd_service}') = 1 ]; then
+			_header "Stopping and removing ${sysd_service} Services"
+			sudo systemctl stop ${sysd_service}
+			sudo systemctl disable ${sysd_service}
 			sudo systemctl daemon-reload
-			_removed "Stopping and removing ${_systemd_service_name} Services - Done!"
+			_removed "Stopping and removing ${sysd_service} Services - Done!"
 		fi
-		## Remove Existing server file
-		if [ -e ${_systemd_service_file} ]; then
-			_header "Removing Existing server file - ${_systemd_service_file}"
-			sudo rm -rf ${_systemd_service_file}
-			_removed "Removed Existing server file - ${_systemd_service_file}"
+		## Remove existing service file
+		if [ -e ${sysd_service_file} ]; then
+			_header "Removing Existing server file - ${sysd_service_file}"
+			sudo rm -rf ${sysd_service_file}
+			_removed "Removed Existing server file - ${sysd_service_file}"
 		fi
-		## Remove Existing Service Default file
-		if [ -e ${_systemd_service_default_file} ]; then
-			_header "Removing Existing Service Default file - ${_systemd_service_default_file}"
-			sudo rm -rf ${_systemd_service_default_file}
-			_removed "Removed Existing Service Default file - ${_systemd_service_default_file}"
+		## Remove existing  service default file
+		if [ -e ${sysd_default_file} ]; then
+			_header "Removing Existing Service Default file - ${sysd_default_file}"
+			sudo rm -rf ${sysd_default_file}
+			_removed "Removed Existing Service Default file - ${sysd_default_file}"
 		fi
 	}
 
 # systemd service setup
-	_systemd_service_setup() {
-			_header "Installing Service : ${_systemd_service_file}"
+	_sysd_service_setup() {
+			_header "Installing Service : ${sysd_service_file}"
 		## Config file is called from config/*.conf -- * is the name of the service
 		## Create Service file
-			_header "Installing ${_systemd_service_file}"
-			for i in "${_systemd_service_file_list[@]}"; do
-				sudo echo $i >> ${_systemd_service_file}
+			_header "Installing ${sysd_service_file}"
+			for i in "${sysd_service_list[@]}"; do
+				sudo echo $i >> ${sysd_service_file}
 			done
-			_success "Installed ${_systemd_service_file}"
+			_success "Installed ${sysd_service_file}"
 		## Show Service File
-			_note ${_systemd_service_file}
+			_note ${sysd_service_file}
 			_sep
-			cat ${_systemd_service_file}
+			cat ${sysd_service_file}
 			_sep
 	}
 # systemd service defaults config
-	_systemd_service_defaults_setup() {
+	_sysd_service_defaults_setup() {
 		## Stop existing service
-			_systemd_services_remove
+			_sysd_services_remove
 		## Run service config install
-			_systemd_service_setup
-		## Create service defaults file - source homebridge_defaults.conf @ homebridge_defaults_list
-			_header "Installing Service Defaults - ${_systemd_service_default_file}"
-			for i in "${_systemd_service_default_list[@]}"; do
-				sudo echo $i >> ${_systemd_service_default_file}
+			_sysd_service_setup
+		## Config file is called from config/*.conf -- * is the name of the service
+			_header "Installing Service Defaults - ${sysd_default_file}"
+			for i in "${sysd_default_list[@]}"; do
+				sudo echo $i >> ${sysd_default_file}
 			done
-			_success "Install ${_systemd_service_default_file}"
+			_success "Install ${sysd_default_file}"
 		## Show service defaults file
 			_sep
-			cat ${_systemd_service_default_file}
+			cat ${sysd_default_file}
 			_sep
 		## Setting permissions - systemd service
 			_header "Setting default permissions on files and folders"
-			_header ${_systemd_service_file}
-			sudo chown ${_username}:${_username} ${_systemd_service_file}
-			sudo chmod 644 ${_systemd_service_file}
-			_success ${_systemd_service_file}
-		## Seting permissions - HomeBridge service defaults
-			_header  ${_systemd_service_default_file}
-			sudo chown ${_username}:${_username} ${_systemd_service_default_file}
-			sudo chmod 644 ${_systemd_service_default_file}
-			_success ${_systemd_service_default_file}
+			_header ${sysd_service_file}
+			sudo chown ${_username}:${_username} ${sysd_service_file}
+			sudo chmod 644 ${sysd_service_file}
+			_success ${sysd_service_file}
+		## Seting permissions - systemd service defaults
+			_header  ${sysd_default_file}
+			sudo chown ${g_user}:${g_group} ${sysd_default_file}
+			sudo chmod 644 ${sysd_default_file}
+			_success ${sysd_default_file}
 	}
 # systemd Service install Function
-	_systemd_service_install_fn() {
-		_systemd_services_remove
-		_systemd_service_setup
-		_systemd_service_defaults_setup
-		_systemd_reload_daemon
-		_header "Starting ${_systemd_service_name}"
-		sudo systemctl start ${_systemd_service_name}
-		_success "${_systemd_service_name} Started"
+	_sysd_service_install() {
+		_sysd_services_remove
+		_sysd_service_setup
+		_sysd_service_defaults_setup
+		_sysd_reload_daemon
+		_header "Starting ${sysd_service}"
+		sudo systemctl start ${sysd_service}
+		_success "${sysd_service} Started"
 	}

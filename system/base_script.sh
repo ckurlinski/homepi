@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#------------------------------------------------------------------------------#
 # Test if superuser
 	_su_test() {
 		# Script must be run as root
@@ -9,6 +10,7 @@
 			exit
 		fi
 	}
+#------------------------------------------------------------------------------#
 # Set Colors
 	_set_colors() {
 		reset=$(echo -en '\033[0m')
@@ -29,6 +31,7 @@
 		lcyan=$(echo -en '\033[01;36m')
 		white=$(echo -en '\033[01;37m')
 	}
+#------------------------------------------------------------------------------#
 # Set Print formatting
 	## Header
 		_header() {
@@ -70,8 +73,15 @@
 				read _ans
 			done
 		}
+#------------------------------------------------------------------------------#
+# convert to capitol letters
+	_all_caps() {
+		# Input str - Output str_caps
+		str_caps=(`echo $str | awk '{print toupper($0)}'`)
+	}
+#------------------------------------------------------------------------------#
 # List Template
-	list_template() {
+	_list_template() {
 	# Script wide listing function
 	# Needs "_l0" array or other assigned for this to work
 	# Sets selection value to "_list_output"
@@ -86,8 +96,9 @@
 		read c1
 			_list_output=${a0[$c1]}
 	}
+#------------------------------------------------------------------------------#
 # Menu List Function
-	menu_list_template() {
+	_menu_list_template() {
 		count=1
 		for c0 in "${l0[@]}"
 		do
@@ -104,18 +115,20 @@
 		MENU_OUTPUT=${a0[$c1]}
 		opt_count=( `expr ${MENU_COUNT} - 1` )
 	}
+#------------------------------------------------------------------------------#
 # Command to run from menu command array
-	menu_command_run() {
+	_menu_command_run() {
 		${opt0[$opt_count]}
 	}
+#------------------------------------------------------------------------------#
 # Generic Base Menu Function
-	g_menu_fn() {
+	_g_menu_fn() {
 		while :
 		do
 			_header "${HEADING}"
 			## Generate menu list from menu options array
-				menu_list_template
+				_menu_list_template
 			## Run choosen command from menu command array
-				menu_command_run
+				_menu_command_run
 		done
 	}

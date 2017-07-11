@@ -1,118 +1,175 @@
 #!/bin/bash
-
-source incl.sh
-
+#------------------------------------------------------------------------------#
+# Find all variables in script directory
+find_var_fn() {
+  find . -type f -name "*.sh" \
+    ! -path "./.git/*" \
+    ! -name "incl.sh" \
+    | xargs grep -o -e "{[^}]*}" | sort | uniq
+}
+#------------------------------------------------------------------------------#
 # Set Script base directory
-	_base_dir() {
-		_install_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-	}
-
+	#base_dir() {
+	#	_install_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+	#}
+#------------------------------------------------------------------------------#
+# Execute to populate configs
+source_conf_scripts() {
+  find . -type f -name "*.conf" \
+    ! -path "./.git/*" \
+    | sed 's/\.\///g' \
+    | awk '{print"source "$0}' > incl.sh
+}
+#------------------------------------------------------------------------------#
+# Execute to set mode on scripts
+source_set_mod() {
+  find . -type f -name "*.sh" \
+    ! -path "./.git/*" \
+    ! -name "incl.sh" \
+    | xargs chmod 644
+}
+#------------------------------------------------------------------------------#
+# Execute to populate source scripts
+source_sh_scripts() {
+    find . -type f -name "*.sh" \
+      ! -path "./.git/*" \
+      ! -name "incl.sh" \
+      | sed 's/\.\///g' \
+      | awk '{print"source "$0}' >> incl.sh
+}
+#------------------------------------------------------------------------------#
+# Create Source File
+  source_conf_scripts
+  source_sh_scripts
+  source_set_mod
+#------------------------------------------------------------------------------#
+# Set Sources
+  source incl.sh
+#------------------------------------------------------------------------------#
 # Pool Menu
-	pool_menu()  {
-		## Header
-			HEADING="Pool Controller"
-		## Write out the menu options array
-			### Use Double Quotes for Text
-				l0=(
-					"Circuit Status"
-					"Circuit Toogle"
-					"nodejs-poolController install"
-					"fix executable"
-					"nodejs-poolController service setup"
-					"Return"
+pool_menu()  {
+	## Header
+		HEADING="Pool Controller"
+	## Write out the menu options array
+		### Use Double Quotes for Text
+			l0=(
+				"nodejs-poolController install"
+				"fix executable"
+				"nodejs-poolController service setup"
+				"Return"
+			)
+	## Map Menu to command Array
+		### Use Single Quotes for Commands
+			opt0=(
+				'_pool_controller_install'
+				'_git_create_executable'
+				'_pool_controller_service_install'
+				'main_menu'
 				)
-		## Map Menu to command Array
-			### Use Single Quotes for Commands
-				opt0=(
-					'circuit_status_fn'
-					'circuit_toggle_fn'
-					'_pool_controller_install'
-					'_git_create_executable'
-					'_pool_controller_service_install'
-					'main_menu'
-					)
-		## Execute Menu Function
-			g_menu_fn
-	}
-
+	## Execute Menu Function
+		_g_menu_fn
+}
+#------------------------------------------------------------------------------#
 # systemd service management menu
-	systemd_menu()  {
-		## Header
-			HEADING="systemd service management"
-		## Write out the menu options array
-			### Use Double Quotes for Text
-				l0=(
-					"systemd service status"
-          "systemd service restart"
-          "systemd service enable"
-          "systemd service disable"
-          "systemd service start"
-          "systemd service stop"
-          "systemd daemon reload"
-					"Return"
+systemd_menu()  {
+	## Header
+		HEADING="systemd service management"
+	## Write out the menu options array
+		### Use Double Quotes for Text
+			l0=(
+				"systemd service status"
+        "systemd service restart"
+        "systemd service enable"
+        "systemd service disable"
+        "systemd service start"
+        "systemd service stop"
+        "systemd daemon reload"
+				"Return"
+			)
+	## Map Menu to command Array
+		### Use Single Quotes for Commands
+			opt0=(
+				'_systemd_service_status'
+        '_sysd_service_restart'
+        '_sysd_service_enable'
+        '_sysd_service_disable'
+        '_sysd_service_start'
+        '_sysd_service_stop'
+        '_sysd_reload_daemon'
+				'main_menu'
 				)
-		## Map Menu to command Array
-			### Use Single Quotes for Commands
-				opt0=(
-					'_systemd_service_status'
-          '_systemd_service_restart'
-          '_systemd_service_enable'
-          '_systemd_service_disable'
-          '_systemd_service_start'
-          '_systemd_service_stop'
-          '_systemd_reload_daemon'
-					'main_menu'
-					)
-		## Execute Menu Function
-			g_menu_fn
-	}
-
+	## Execute Menu Function
+		_g_menu_fn
+}
+#------------------------------------------------------------------------------#
+# System Menu
+system_menu()  {
+	## Header
+		HEADING="System Menu"
+	## Write out the menu options array
+		### Use Double Quotes for Text
+			l0=(
+				"Update Raspbian Base System"
+				"Install Dependencies"
+				"NodeJS install"
+				"Return"
+			)
+	## Map Menu to command Array
+		### Use Single Quotes for Commands
+			opt0=(
+				'_system_update'
+				'_system_depends_install'
+				'_nodejs_install'
+				'main_menu'
+				)
+	## Execute Menu Function
+		_g_menu_fn
+}
+#------------------------------------------------------------------------------#
 # Main Menu
-	main_menu()  {
-		## Header
-			HEADING="HomePi"
-		## Write out the menu options array
-			### Use Double Quotes for Text
-				l0=(
-					"Update Raspbian-Lite"
-					"Install Dependencies"
-					"NodeJS install"
-					"Install Homebridge"
-					"Install systemd Homebridge service files"
-					"Install HomeBridge config.json"
-					"Start HomeBridge services"
-					"Show HomeBridge Service Status"
-					"FAAC GPIO Door Opener"
-					"npm extra installations"
-					"Pool PI Menu"
-					"systemd Service Management"
-					"Exit"
+main_menu()  {
+	## Header
+		HEADING="HomePi"
+	## Write out the menu options array
+		### Use Double Quotes for Text
+			l0=(
+				"System Menu"
+				"Install Homebridge"
+				"Install systemd Homebridge service files"
+				"Install HomeBridge config.json"
+				"Start HomeBridge services"
+				"Show HomeBridge Service Status"
+				"FAAC GPIO Door Opener"
+				"npm extra installations"
+				"Pool PI Menu"
+				"systemd Service Management"
+				"Exit"
+			)
+	## Map Menu to command Array
+		### Use Single Quotes for Commands
+			opt0=(
+				'system_menu'
+				'_install_homebridge_main'
+				'_homebridge_defaults_setup'
+				'_config_json_setup'
+				'_start_homebridge_fn'
+				'_service_status'
+				'_faac_install'
+				'_node_extras_setup'
+				'pool_menu'
+				'systemd_menu'
+				'exit'
 				)
-		## Map Menu to command Array
-			### Use Single Quotes for Commands
-				opt0=(
-					'_base_update'
-					'_depends_install'
-					'_node_install'
-					'_install_homebridge_main'
-					'_homebridge_defaults_setup'
-					'_config_json_setup'
-					'_start_homebridge_fn'
-					'_service_status'
-					'_faac_install'
-					'_node_extras_setup'
-					'pool_menu'
-					'systemd_menu'
-					'exit'
-					)
-		## Execute Menu Function
-			g_menu_fn
-	}
-# Set Script _base_dir
-	_base_dir
+	## Execute Menu Function
+		_g_menu_fn
+}
+#------------------------------------------------------------------------------#
 # Execute set color function
  _set_colors
+#------------------------------------------------------------------------------#
 # Execute super user test
  _su_test
+#------------------------------------------------------------------------------#
 # Execute main menu
 	main_menu
+#------------------------------------------------------------------------------#
