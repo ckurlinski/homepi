@@ -4,135 +4,27 @@
 	hb_config_list=(
 		"{"
 		"\"bridge\" : {"
-		"\"username\" : \"${hb_user_id}\","
-		"\"name\" : \"${hb_node_name}\","
-		"\"pin\" : \"${hb_pin_code}\","
-		"\"port\" : \"${hb_random_port}\""
+		"\"username\" : \"hb_user_id\","
+		"\"name\" : \"hb_node_name\","
+		"\"pin\" : \"hb_pin_code\","
+		"\"port\" : \"hb_random_port\""
 		"},"
 		"\"platforms\" : ["
 		"{"
-		"\"port\" : \"${hb_server_port}\","
-		"\"restart\" : \"sudo systemctl restart ${hb_name}\","
-		"\"name\" : \"${hb_node_man}\","
+		"\"port\" : \"hb_server_port\","
+		"\"restart\" : \"sudo systemctl restart hb_name\","
+		"\"name\" : \"hb_node_man\","
 		"\"log\" : \"systemd\","
-		"\"platform\" : \"${hb_name} Server\""
+		"\"platform\" : \"hb_name Server\""
 		"}"
 		"]"
 		"}"
 	)
 #------------------------------------------------------------------------------#
-# Homebridge variable config list
-	hb_var_list=(
-		hb_user_id
-		hb_node_name
-		hb_pin_code
-		hb_random_port
-		hb_server_port
-		hb_name
-		hb_node_man
-		hb_name
-	)
-#------------------------------------------------------------------------------#
 # set systemd name
 	_hb_sysd_name() {
 		sysd_name="${hb_name}"
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge config.raw Create
-	_hb_config_json_tmp() {
-		## Create the json config file
-			_header "Creating tmp config : ${hb_config_tmp}"
-			for i in "${hb_config_list[@]}"; do
-				echo $i >> ${hb_config_tmp}
-			done
-			_success "Created tmp config : ${hb_config_tmp}"
-			_sep
-			cat ${hb_config_tmp}
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge Node Name
-	_hb_node_name() {
-		_header "Enter name for ${sysd_name}"
-		read _ans
-		_ans_check
-		hb_node_name="${_ans}"
-		_success "${hb_node_name}"
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge Node Manufacturer
-	_hb_node_man() {
-		_header "Enter Manufacturer for ${sysd_name} Node"
-		read _ans
-		_ans_check
-		hb_node_man="${_ans}"
-		_success "${hb_node_man}"
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge Node Device Name
-	_hb_node_device_name() {
-		_header "Enter Device ${sysd_name} Name for Node"
-		read _ans
-		_ans_check
-		hb_node_device_name="${_ans}"
-		_success "${hb_node_device_name}"
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge Random User ID
-	_hb_user_id() {
-		## Define random ranges
-			RANGE=255
-			number=$RANDOM
-			numbera=$RANDOM
-			numberb=$RANDOM
-			let "number %= $RANGE"
-			let "numbera %= $RANGE"
-			let "numberb %= $RANGE"
-		## Base octet for file
-			octets='00:60:2F'
-		## Random base16 creation
-			octeta=`echo "obase=16;$number" | bc`
-			octetb=`echo "obase=16;$numbera" | bc`
-			octetc=`echo "obase=16;$numberb" | bc`
-		## Show Homebridge User Name
-			hb_user_id="${octets}:${octeta}:${octetb}:${octetc}"
-			_header "Generating ${sysd_name} Usename"
-			_warning ${hb_user_id}
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge Random Port generator
-	_hb_random_port() {
-		## Generate random port
-			hb_random_port=(`shuf -i 40000-65000 -n 1`)
-		## Show random port
-			_header "${sysd_name} - Randomizing port"
-			_warning ${hb_random_port}
-	}
-#------------------------------------------------------------------------------#
-# HomeBridge Server Random Port generator
-	_hb_server_port() {
-		## Generate random port
-			hb_server_port=(`shuf -i 40000-65000 -n 1`)
-		## Show random port
-			_header "${sysd_name} - Randomizing port"
-			_warning ${hb_server_port}
-	}
-#------------------------------------------------------------------------------#
-# Random access code generator
-	_hb_pin_code() {
-		## Generate (8) random numbers for HomeBridge pin
-			a=`echo $((1 + RANDOM % 9))`
-			b=`echo $((1 + RANDOM % 9))`
-			c=`echo $((1 + RANDOM % 9))`
-			d=`echo $((1 + RANDOM % 9))`
-			e=`echo $((1 + RANDOM % 9))`
-			f=`echo $((1 + RANDOM % 9))`
-			g=`echo $((1 + RANDOM % 9))`
-			h=`echo $((1 + RANDOM % 9))`
-		## Assemble and format numbers
-			hb_pin_code="${a}${b}${c}-${d}${e}-${f}${g}${h}"
-		## Show HomeBridge random pin
-			_header "Generating ${sysd_name} access code"
-			_warning ${hb_pin_code}
+		sed -i "s/hb_name/${hb_name}/g" ${hb_config_tmp}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json setup check
@@ -155,6 +47,110 @@
 				sudo rm -rf ${_config_json}
 				_removed "Removed" ${_config_json}
 			fi
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge config.raw Create
+	_hb_config_json_tmp() {
+		## Create the json config file
+			_header "Creating tmp config : ${hb_config_tmp}"
+			for i in "${hb_config_list[@]}"; do
+				echo $i >> ${hb_config_tmp}
+			done
+			_success "Created tmp config : ${hb_config_tmp}"
+			_sep
+			cat ${hb_config_tmp}
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge Node Name
+	_hb_node_name() {
+		_header "Enter name for ${sysd_name}"
+		read _ans
+		_ans_check
+		hb_node_name="${_ans}"
+		_success "${hb_node_name}"
+		sed -i "s/hb_node_name/${hb_node_name}/g" ${hb_config_tmp}
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge Node Manufacturer
+	_hb_node_man() {
+		_header "Enter Manufacturer for ${sysd_name} Node"
+		read _ans
+		_ans_check
+		hb_node_man="${_ans}"
+		_success "${hb_node_man}"
+		sed -i "s/hb_node_man/${hb_node_man}/g" ${hb_config_tmp}
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge Node Device Name
+	_hb_node_device_name() {
+		_header "Enter Device ${sysd_name} Name for Node"
+		read _ans
+		_ans_check
+		hb_node_device_name="${_ans}"
+		_success "${hb_node_device_name}"
+		sed -i "s/hb_node_device_name/${hb_node_device_name}/g" ${hb_config_tmp}
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge Random User ID
+	_hb_user_id() {
+		## Define random ranges
+			RANGE=255
+			number=$RANDOM
+			numbera=$RANDOM
+			numberb=$RANDOM
+			let "number %= $RANGE"
+			let "numbera %= $RANGE"
+			let "numberb %= $RANGE"
+		## Base octet for file
+			octets='00:60:2F'
+		## Random base16 creation
+			octeta=`echo "obase=16;$number" | bc`
+			octetb=`echo "obase=16;$numbera" | bc`
+			octetc=`echo "obase=16;$numberb" | bc`
+		## Show Homebridge User Name
+			hb_user_id="${octets}:${octeta}:${octetb}:${octetc}"
+			_header "Generating ${sysd_name} Usename"
+			_warning ${hb_user_id}
+		sed -i "s/hb_user_id/${hb_user_id}/g" ${hb_config_tmp}
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge Random Port generator
+	_hb_random_port() {
+		## Generate random port
+			hb_random_port=(`shuf -i 40000-65000 -n 1`)
+		## Show random port
+			_header "${sysd_name} - Randomizing port"
+			_warning ${hb_random_port}
+		sed -i "s/hb_random_port/${hb_random_port}/g" ${hb_config_tmp}
+	}
+#------------------------------------------------------------------------------#
+# HomeBridge Server Random Port generator
+	_hb_server_port() {
+		## Generate random port
+			hb_server_port=(`shuf -i 40000-65000 -n 1`)
+		## Show random port
+			_header "${sysd_name} - Randomizing port"
+			_warning ${hb_server_port}
+		sed -i "s/hb_server_port/${hb_server_port}" ${hb_config_tmp}
+	}
+#------------------------------------------------------------------------------#
+# Random access code generator
+	_hb_pin_code() {
+		## Generate (8) random numbers for HomeBridge pin
+			a=`echo $((1 + RANDOM % 9))`
+			b=`echo $((1 + RANDOM % 9))`
+			c=`echo $((1 + RANDOM % 9))`
+			d=`echo $((1 + RANDOM % 9))`
+			e=`echo $((1 + RANDOM % 9))`
+			f=`echo $((1 + RANDOM % 9))`
+			g=`echo $((1 + RANDOM % 9))`
+			h=`echo $((1 + RANDOM % 9))`
+		## Assemble and format numbers
+			hb_pin_code="${a}${b}${c}-${d}${e}-${f}${g}${h}"
+		## Show HomeBridge random pin
+			_header "Generating ${sysd_name} access code"
+			_warning ${hb_pin_code}
+		sed -i "s/hb_pin_code/${hb_pin_code}/g" ${hb_config_tmp}
 	}
 #------------------------------------------------------------------------------#
 # HomeBridge config.json Create
