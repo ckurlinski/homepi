@@ -17,8 +17,6 @@ find_var_fn() {
 source_conf_scripts() {
   find . -type f -name "*.conf" \
     ! -path "./.git/*" \
-    ! -name "homebridge.conf" \
-    ! -name "poolcontroller.conf" \
     | sed 's/\.\///g' \
     | awk '{print"source "$0}' > incl.sh
 }

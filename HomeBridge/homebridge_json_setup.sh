@@ -1,7 +1,43 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# Script source
-	source HomeBridge/homebridge.conf
+# systemd service name
+	sysd_name="homebridge"
+#------------------------------------------------------------------------------#
+# base directory
+	hb_base_dir="/var/lib/${sysd_name}"
+#------------------------------------------------------------------------------#
+# Temp config
+	hb_config_tmp="config.raw"
+#------------------------------------------------------------------------------#
+# Default config.json path
+	hb_config_json="${hb_base_dir}/config.json"
+#------------------------------------------------------------------------------#
+# HomeBridge install list
+	hb_install_list=(
+		homebridge
+		homebridge-server
+	)
+#------------------------------------------------------------------------------#
+# base json config
+	hb_config_list=(
+		"{"
+		"\"bridge\" : {"
+		"\"username\" : \"${hb_user_id}\","
+		"\"name\" : \"${hb_node_name}\","
+		"\"pin\" : \"${hb_pin_code}\","
+		"\"port\" : \"${hb_random_port}\""
+		"},"
+		"\"platforms\" : ["
+		"{"
+		"\"port\" : \"${hb_server_port}\","
+		"\"restart\" : \"sudo systemctl restart ${sysd_name}\","
+		"\"name\" : \"${hb_node_name}\","
+		"\"log\" : \"systemd\","
+		"\"platform\" : \"Server\""
+		"}"
+		"]"
+		"}"
+	)
 #------------------------------------------------------------------------------#
 # HomeBridge Node Name
 	_hb_node_name() {

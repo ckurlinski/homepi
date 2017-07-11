@@ -1,7 +1,22 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# Script source
-	source HomeBridge/homebridge.conf
+# systemd service name
+	sysd_name="homebridge"
+#------------------------------------------------------------------------------#
+# base directory
+	hb_base_dir="/var/lib/${sysd_name}"
+#------------------------------------------------------------------------------#
+# Temp config
+	hb_config_tmp="config.raw"
+#------------------------------------------------------------------------------#
+# Default config.json path
+	hb_config_json="${hb_base_dir}/config.json"
+#------------------------------------------------------------------------------#
+# HomeBridge install list
+	hb_install_list=(
+		homebridge
+		homebridge-server
+	)
 #------------------------------------------------------------------------------#
 # HomeBridge Install Dependencies
 	_hb_depends_install() {
