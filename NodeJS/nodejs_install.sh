@@ -3,7 +3,13 @@
 # Choose NodeJS version
 	_nodejs_version() {
 		_header "Choose NodeJS Version"
-		_l0=${nodejs_ver_list[@]}
+		_l0=(
+			"latest-v4.x"
+			"latest-v5.x"
+			"latest-v6.x"
+			"latest-v7.x"
+			"latest-v8.x"
+		)
 		_list_template
 		nodejs_ver=${_list_output}
 		_success "NodeJS Version is: ${nodejs_ver}"
