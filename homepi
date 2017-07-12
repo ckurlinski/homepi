@@ -2,7 +2,6 @@
 #------------------------------------------------------------------------------#
 # Follow symbolic link to source files
 SOURCE=$(dirname $(readlink -f $0))
-echo ${SOURCE}
 cd ${SOURCE}
 #------------------------------------------------------------------------------#
 # Find all variables in script directory
