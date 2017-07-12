@@ -35,10 +35,12 @@
 		# Download NodeJS and extract
 			_header "Downloading ${node_sel}"
 			cd ${g_node_dir}
-			sudo wget -q ${nodejs_web}/${nodejs_ver}/${node_sel}
+			sudo wget --progress=dot ${nodejs_web}/${nodejs_ver}/${node_sel}
 			_success "Downloaded ${node_sel}"
 		# Extracting NodeJS to system dir
 			_header "Extracting ${node_file} to ${g_node_dir}"
+			ls -asl ${g_node_dir}/${node_file}
+			read huh
 			sudo tar xJf ${node_file} --strip=1
 			_success "${node_file} Extracted"
 		# remove tmp files / folders
