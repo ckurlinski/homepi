@@ -91,8 +91,8 @@
 			* )	sys_arch="0" ;;
 		esac
 		_sep
-		_success "${sys_os}"
-		_success "${sys_arch}"
+		_success "Installed OS = ${sys_os}"
+		_success "System Arch = ${sys_arch}"
 		_sep
 	}
 
