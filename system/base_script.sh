@@ -80,6 +80,23 @@
 			done
 		}
 #------------------------------------------------------------------------------#
+# Get system OS and Arch
+	_system_os_arch_detect() {
+		sys_os=(`uname`)
+		case $(uname -m) in
+			armhf ) sys_arch="armv6l" ;;
+			x86-64 ) sys_arch="x64" ;;
+			i686 ) sys_arch="x86" ;;
+			i386 ) sys_arch="x86" ;;
+			* )	sys_arch="0" ;;
+		esac
+		_sep
+		_success "${sys_os}"
+		_success "${sys_arch}"
+		_sep
+	}
+
+#------------------------------------------------------------------------------#
 # convert to capitol letters
 	_all_caps() {
 		# Input str - Output str_caps

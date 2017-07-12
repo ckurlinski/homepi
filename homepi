@@ -1,184 +1,180 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# Follow symbolic link to source files
-SOURCE=$(dirname $(readlink -f $0))
-cd ${SOURCE}
-#------------------------------------------------------------------------------#
-# Find all variables in script directory
-find_var_fn() {
-  find . -type f -name "*.sh" \
-    ! -path "./.git/*" \
-    ! -name "incl.sh" \
-    | xargs grep -o -e "{[^}]*}" | sort | uniq
-}
-#------------------------------------------------------------------------------#
-# Set Script base directory
-	#base_dir() {
-	#	_install_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-	#}
+# Follow symbolic link to source directory
+#  and run from that directory
+  SOURCE=$(dirname $(readlink -f $0))
+  cd ${SOURCE}
 #------------------------------------------------------------------------------#
 # Execute to populate configs
-source_conf_scripts() {
-  find . -type f -name "*.conf" \
-    ! -path "./.git/*" \
-    | sed 's/\.\///g' \
-    | awk '{print"source "$0}' > incl.sh
-}
+  source_conf_scripts() {
+    find . -type f -name "*.conf" \
+      ! -path "./.git/*" \
+      | sed 's/\.\///g' \
+      | awk '{print"source "$0}' > incl.sh
+  }
 #------------------------------------------------------------------------------#
 # Execute to set mode on scripts
-source_set_mod() {
-  find . -type f -name "*.sh" \
-    ! -path "./.git/*" \
-    ! -name "incl.sh" \
-    | xargs chmod 644
-}
-#------------------------------------------------------------------------------#
-# Execute to populate source scripts
-source_sh_scripts() {
+  source_set_mod() {
     find . -type f -name "*.sh" \
       ! -path "./.git/*" \
       ! -name "incl.sh" \
-      | sed 's/\.\///g' \
-      | awk '{print"source "$0}' >> incl.sh
-}
+      | xargs chmod 644
+  }
 #------------------------------------------------------------------------------#
-# Create Source File
+# Execute to populate source scripts
+  source_sh_scripts() {
+      find . -type f -name "*.sh" \
+        ! -path "./.git/*" \
+        ! -name "incl.sh" \
+        | sed 's/\.\///g' \
+        | awk '{print"source "$0}' >> incl.sh
+  }
+#------------------------------------------------------------------------------#
+# Create Source File: ./incl.sh
+# Automatically updates incl.sh to include all *.conf and *.sh in the tree
+#  except .git folders, and incl.sh
   source_conf_scripts
   source_sh_scripts
   source_set_mod
 #------------------------------------------------------------------------------#
-# Set Sources
+# Set Sources to freshly created incl.sh
   source incl.sh
 #------------------------------------------------------------------------------#
+# System Menu
+  system_menu()  {
+  		HEADING="System Menu"
+      # Menu listing
+  			l0=(
+  				"Update Raspbian Base System"
+  				"Install Dependencies"
+  				"NodeJS install"
+  				"Return"
+  			)
+      # Command map
+  			opt0=(
+  				'_system_update'
+  				'_system_depends_install'
+  				'_nodejs_install'
+  				'main_menu'
+  				)
+      # Execute Menu
+        _g_menu_fn
+  }
+#------------------------------------------------------------------------------#
+# NodeJS Menu
+  nodejs_menu()  {
+  		HEADING="NodeJS Menu"
+      # Menu listing
+  			l0=(
+  				""
+  				"Install Dependencies"
+  				"NodeJS install"
+  				"Return"
+  			)
+      # Command map
+  			opt0=(
+  				'_system_update'
+  				'_system_depends_install'
+  				'_nodejs_install'
+  				'main_menu'
+  				)
+      # Execute Menu
+        _g_menu_fn
+  }
+#------------------------------------------------------------------------------#
 # HomeBridge Menu
-homebridge_menu()  {
-	## Header
-		HEADING="Homebridge Menu"
-	## Write out the menu options array
-		### Use Double Quotes for Text
-			l0=(
-				"Install systemd Homebridge service files"
-        "Homebridge Configuration Install"
-        "Install HomeBridge systemd services"
-				"Return"
-			)
-	## Map Menu to command Array
-		### Use Single Quotes for Commands
-			opt0=(
-				'_hb_install_main'
-        '_hb_config_install'
-        '_homebridge_service_install'
-				'main_menu'
-				)
-	## Execute Menu Function
-		_g_menu_fn
-}
+  homebridge_menu()  {
+  		HEADING="Homebridge Menu"
+      # Menu listing
+  			l0=(
+  				"Install systemd Homebridge service files"
+          "Homebridge Configuration Install"
+          "Install HomeBridge systemd services"
+  				"Return"
+  			)
+      # Command map
+  			opt0=(
+  				'_hb_install_main'
+          '_hb_config_install'
+          '_homebridge_service_install'
+  				'main_menu'
+  				)
+  	   # Execute Menu
+        _g_menu_fn
+  }
 #------------------------------------------------------------------------------#
 # Pool Menu
-pool_menu()  {
-	## Header
-		HEADING="Pool Controller"
-	## Write out the menu options array
-		### Use Double Quotes for Text
-			l0=(
-				"Nodejs-poolController install"
-				"nodejs-poolController service setup"
-				"Return"
-			)
-	## Map Menu to command Array
-		### Use Single Quotes for Commands
-			opt0=(
-				'_pool_controller_install'
-				'_pool_controller_service_install'
-				'main_menu'
-				)
-	## Execute Menu Function
-		_g_menu_fn
-}
+  pool_menu()  {
+  		HEADING="Pool Controller"
+      # Menu listing
+  			l0=(
+  				"Nodejs-poolController install"
+  				"nodejs-poolController service setup"
+  				"Return"
+  			)
+      # Command map
+  			opt0=(
+  				'_pool_controller_install'
+  				'_pool_controller_service_install'
+  				'main_menu'
+  				)
+      # Execute Menu
+        _g_menu_fn
+  }
 #------------------------------------------------------------------------------#
 # systemd service management menu
-systemd_menu()  {
-	## Header
-		HEADING="systemd service management"
-	## Write out the menu options array
-		### Use Double Quotes for Text
-			l0=(
-				"service status"
-        "restart service"
-        "enable service"
-        "disable service"
-        "start service"
-        "stop service"
-        "daemon reload"
-				"Return"
-			)
-	## Map Menu to command Array
-		### Use Single Quotes for Commands
-			opt0=(
-				'_sysd_service_status'
-        '_sysd_service_restart'
-        '_sysd_service_enable'
-        '_sysd_service_disable'
-        '_sysd_service_start'
-        '_sysd_service_stop'
-        '_sysd_reload_daemon'
-				'main_menu'
-				)
-	## Execute Menu Function
-		_g_menu_fn
-}
-#------------------------------------------------------------------------------#
-# System Menu
-system_menu()  {
-	## Header
-		HEADING="System Menu"
-	## Write out the menu options array
-		### Use Double Quotes for Text
-			l0=(
-				"Update Raspbian Base System"
-				"Install Dependencies"
-				"NodeJS install"
-				"Return"
-			)
-	## Map Menu to command Array
-		### Use Single Quotes for Commands
-			opt0=(
-				'_system_update'
-				'_system_depends_install'
-				'_nodejs_install'
-				'main_menu'
-				)
-	## Execute Menu Function
-		_g_menu_fn
-}
+  systemd_menu()  {
+  		HEADING="systemd service management"
+      # Menu listing
+  			l0=(
+  				"service status"
+          "restart service"
+          "enable service"
+          "disable service"
+          "start service"
+          "stop service"
+          "daemon reload"
+  				"Return"
+  			)
+      # Command map
+  			opt0=(
+  				'_sysd_service_status'
+          '_sysd_service_restart'
+          '_sysd_service_enable'
+          '_sysd_service_disable'
+          '_sysd_service_start'
+          '_sysd_service_stop'
+          '_sysd_reload_daemon'
+  				'main_menu'
+  				)
+      # Execute Menu
+        _g_menu_fn
+  }
 #------------------------------------------------------------------------------#
 # Main Menu
-main_menu()  {
-	## Header
-		HEADING="HomePi"
-	## Write out the menu options array
-		### Use Double Quotes for Text
-			l0=(
-				"System Menu"
-				"Homebridge Menu"
-				"npm extra installations"
-				"Pool PI Menu"
-				"systemd Service Management"
-				"Exit"
-			)
-	## Map Menu to command Array
-		### Use Single Quotes for Commands
-			opt0=(
-				'system_menu'
-				'homebridge_menu'
-				'_node_extras_setup'
-				'pool_menu'
-				'systemd_menu'
-				'exit'
-				)
-	## Execute Menu Function
-		_g_menu_fn
-}
+  main_menu()  {
+  		HEADING="HomePi"
+      # Menu listing
+  			l0=(
+  				"System Menu"
+  				"NodeJS and npm"
+          "Homebridge Menu"
+  				"Pool PI Menu"
+  				"systemd Service Management"
+  				"Exit"
+  			)
+      # Command map
+  			opt0=(
+  				'system_menu'
+  				'nodejs_menu'
+          'homebridge_menu'
+  				'pool_menu'
+  				'systemd_menu'
+  				'exit'
+  				)
+      # Execute Menu
+        _g_menu_fn
+  }
 #------------------------------------------------------------------------------#
 # Create symbolic link in ${g_node_dir} to homepi
   _sym_link_homepi
