@@ -13,7 +13,7 @@
 		_system_os_arch_detect
 		_nodejs_version
 		_select "Choose NodeJS to download"
-		_l0=(`curl -s ${nodejs_web}/${nodejs_ver} \
+		_l0=(`curl -s ${nodejs_web}/${nodejs_ver}/ \
 			| awk 'BEGIN{FS="\"";OFS="\t"}{print$2}' \
 			| grep -i ${sys_os} \
 			| grep ${sys_arch} \
