@@ -1,4 +1,15 @@
 #!/bin/bash
+#------------------------------------------------------------------------------#
+# Create symbolic link in ${g_node_dir} to homepi
+	_sym_link_homepi() {
+		if [[ -e ${g_node_dir}/homepi ]]; then
+			echo "Welcome to HomePi"
+		else
+			sudo ln -s ${g_node_dir}/homepi $(pwd)/homepi
+			sudo chmod 755 ${g_node_dir}/homepi
+			echo "Welcome to HomePi"
+		fi
+	}
 
 #------------------------------------------------------------------------------#
 # Test if superuser
