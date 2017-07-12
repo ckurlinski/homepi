@@ -1,5 +1,12 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+# Follow symbolic link to source files
+SCRIPT_DIR=''
+pushd "$(dirname "$(readlink -f "$BASH_SOURCE")")" > /dev/null && {
+    SCRIPT_DIR="$PWD"
+    popd > /dev/null
+}
+#------------------------------------------------------------------------------#
 # Find all variables in script directory
 find_var_fn() {
   find . -type f -name "*.sh" \
