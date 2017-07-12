@@ -66,15 +66,11 @@
   		HEADING="NodeJS Menu"
       # Menu listing
   			l0=(
-  				""
-  				"Install Dependencies"
-  				"NodeJS install"
+  				"NodeJS Install"
   				"Return"
   			)
       # Command map
   			opt0=(
-  				'_system_update'
-  				'_system_depends_install'
   				'_nodejs_install'
   				'main_menu'
   				)
