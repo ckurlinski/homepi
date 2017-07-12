@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#------------------------------------------------------------------------------#
 # Choose NodeJS version
 	_nodejs_version() {
 		_header "Choose NodeJS Version"
@@ -14,6 +14,7 @@
 		nodejs_ver=${_list_output}
 		_success "NodeJS Version is: ${nodejs_ver}"
 	}
+#------------------------------------------------------------------------------#
 # List NodeJS Downloads
 	_nodejs_download_list() {
 		_system_os_arch_detect
@@ -28,23 +29,26 @@
 		node_sel=${_list_output}
 		_success ${node_sel}
 	}
-
+#------------------------------------------------------------------------------#
 # Install NodeJS
 	_nodejs_install() {
 		_nodejs_download_list
 		# Download NodeJS and extract
+			_sep
 			_header "Downloading ${node_sel}"
 			cd ${g_node_dir}
-			sudo wget --progress=dot ${nodejs_web}/${nodejs_ver}/${node_sel}
-			_success "Downloaded ${node_sel}"
+			sudo wget -q ${nodejs_web}/${nodejs_ver}/${node_sel}
+			_success "$(ls -asl ${g_node_dir}/${node_sel})"
+			_sep
 		# Extracting NodeJS to system dir
-			_header "Extracting ${node_file} to ${g_node_dir}"
-			ls -asl ${g_node_dir}/${node_file}
-			read huh
-			sudo tar xJf ${node_file} --strip=1
-			_success "${node_file} Extracted"
+			_header "Extracting ${node_sel} to ${g_node_dir}"
+			sudo tar xJf ${node_sel} --strip=1
+			_success "${node_sel} Extracted"
+			_sep
 		# remove tmp files / folders
-			_header "Removing tar.xz : ${node_file}"
-			sudo rm ${node_file}
-			_removed "Removed - ${node_file}"
+			_header "Removing tar.xz : ${node_sel}"
+			sudo rm ${node_sel}
+			_removed "Removed - ${node_sel}"
+			_sep
 	}
+#------------------------------------------------------------------------------#
