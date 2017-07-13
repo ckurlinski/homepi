@@ -51,6 +51,7 @@ for the package"
 #------------------------------------------------------------------------------#
 # npm installed check
 	_npm_install_test() {
+		_note "Checking - ${npm_package}"
 		npm -g list ${npm_package} > /dev/null \
 			&& npm_installed=1 \
 			|| npm_installed=0
