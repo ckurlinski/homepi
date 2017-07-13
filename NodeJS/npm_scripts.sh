@@ -28,6 +28,7 @@
 			_warning "${npm_package} is not installed"
 			_sep
 			_select "Install ${npm_package}: (y|n)"
+			_sep
 				read _ans
 				case ${_ans} in
 					y)	_header "Installing ${npm_package}"
@@ -48,6 +49,7 @@
 	_npm_package_tree() {
 		_select "Select npm package to view"
 			_node_select_package
+		_sep
 		_success "npm package: ${npm_package}"
 		_sep
 			_npm_check_package

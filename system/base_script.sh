@@ -149,10 +149,13 @@
 	_g_menu_fn() {
 		while :
 		do
+			_sep
 			_header "${HEADING}"
-			## Generate menu list from menu options array
-				_menu_list_template
+			_sep
+			## Generate menu list from menu list array
+			_menu_list_template
+			_sep
 			## Run choosen command from menu command array
-				_menu_command_run
+			_menu_command_run
 		done
 	}
