@@ -77,7 +77,7 @@ for the package"
 			if [[ ${npm_installed} == 1 ]]; then
 				_sep
 				_header "npm install tree for package: ${npm_package}"
-					npm -g list ${npm_package}
+					npm -g tree ${npm_package}
 				_sep
 				_select "Press the Any Key to continue...."
 				read huh
