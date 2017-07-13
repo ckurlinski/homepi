@@ -68,7 +68,7 @@ for the package"
 	}
 #------------------------------------------------------------------------------#
 # list npm package tree
-	_npm_package_tree() {
+	_npm_package_info() {
 		_select "Select npm package to view"
 			_node_select_package
 		_sep
@@ -77,8 +77,8 @@ for the package"
 			_npm_check_package
 			if [[ ${npm_installed} == 1 ]]; then
 				_sep
-				_header "npm install tree for package: ${npm_package}"
-					npm -g tree ${npm_package}
+				_header "npm show information for package: ${npm_package}"
+					npm -g ll ${npm_package}
 				_sep
 				_select "Press the Any Key to continue...."
 				read huh
