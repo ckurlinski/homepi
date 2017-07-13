@@ -1,5 +1,10 @@
 #!/bin/bash
-
+#------------------------------------------------------------------------------#
+# check to see if package is installed
+  _cmd_install_check() {
+    npm_package="${npm_package_name}"
+    _npm_check_package
+  }
 #------------------------------------------------------------------------------#
 # Make script_cmd_dir Directory
 # pass var script_cmd_dir

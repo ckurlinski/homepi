@@ -71,14 +71,15 @@
 		_note() {
 			printf "${lyellow}Note:${reset}  ${lyellow}%s${reset}\n" "$@"
 		}
-	# Null responce check
-		_ans_check() {
-			while [ -z "${_ans}" ]; do
-				_error "null string"
-				_header "Re enter value"
-				read _ans
-			done
-		}
+#------------------------------------------------------------------------------#
+# Null responce check
+	_ans_check() {
+		while [ -z "${_ans}" ]; do
+			_error "null string"
+			_header "Re enter value"
+			read _ans
+		done
+	}
 #------------------------------------------------------------------------------#
 # Get system OS and Arch
 	_system_os_arch_detect() {

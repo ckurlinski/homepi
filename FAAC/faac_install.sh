@@ -43,6 +43,8 @@
 	}
 ## FAAC Installation
 	_faac_install() {
+		# Check if cmdswitch2 is installed
+			_cmd_install_check
 		# Create script directory
 			_cmd2_script_dir
 		# Create script - open
