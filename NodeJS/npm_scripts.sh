@@ -22,7 +22,7 @@ for the package"
 # Install a npm
 	_npm_setup() {
 		## Install nodes
-			for i in "${npm_package[@]}"; do
+			for i in "${npm_package}"; do
 					npm install -g --unsafe-perm --silent $i
 				_success $i
 			done
