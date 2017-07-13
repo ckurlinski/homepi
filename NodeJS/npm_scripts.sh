@@ -3,7 +3,7 @@
 # Select npm package to install
 	_node_select_package() {
 		_l0=(
-			$(awk '{print"\""$0"\""}' ${npm_package_file})
+			$(cat ${npm_package_file})
 		)
 		_list_template
 		npm_package=${_list_output}
