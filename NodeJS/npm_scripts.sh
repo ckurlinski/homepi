@@ -23,8 +23,7 @@ for the package"
 	_npm_setup() {
 		## Install nodes
 			for i in "${npm_package[@]}"; do
-				_header "Installing $i"
-					npm install -g --unsafe-perm --silent $i > /dev/null
+					npm install -g --unsafe-perm --silent $i
 				_success $i
 			done
 	}
