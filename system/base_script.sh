@@ -149,7 +149,6 @@
 	_g_menu_fn() {
 		while :
 		do
-			_sep
 			_header "${HEADING}"
 			_sep
 			## Generate menu list from menu list array

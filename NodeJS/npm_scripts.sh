@@ -9,6 +9,16 @@
 		npm_package=${_list_output}
 	}
 #------------------------------------------------------------------------------#
+# npm packege installler
+	_npm_installer() {
+		_select "Select from npm packages with configs on system"
+		_note "If you want to add a npm package, create subfolder and configs
+for the package"
+		_sep
+		_node_select_package
+		_npm_install
+	}
+#------------------------------------------------------------------------------#
 # Install a npm
 	_npm_setup() {
 		## Install nodes
@@ -19,29 +29,41 @@
 			done
 	}
 #------------------------------------------------------------------------------#
+# npm install
+	_npm_install() {
+		_select "Install ${npm_package}: (y|n)"
+			read _ans
+		_sep
+			case ${_ans} in
+				y)	_header "Installing ${npm_package}"
+						_npm_setup
+						if [[ ${npm_test} == 1 ]]; then
+							_success "${npm_package} = Installed"
+						fi
+						_sep
+						npm_installed=1
+						;;
+				*)	_warning "${npm_package} was not installed, Aborted"
+						_sep
+						npm_installed=0
+						;;
+			esac
+	}
+#------------------------------------------------------------------------------#
+# npm installed check
+	_npm_install_test() {
+		npm -g list ${npm_package} > /dev/null \
+			&& npm_installed=1 \
+			|| npm_installed=0
+	}
+#------------------------------------------------------------------------------#
 # Check to see if npm package is installed
 # var ${npm_package} is supplied
 	_npm_check_package() {
-		npm_test=(`npm -g list ${npm_package} > /dev/null && echo 1 || echo 0`)
-		if [[ ${npm_test} == 0 ]]; then
+		if [[ ${npm_installed} == 0 ]]; then
 			_sep
-			_warning "${npm_package} is not installed"
+			_error "${npm_package} is not installed"
 			_sep
-			_select "Install ${npm_package}: (y|n)"
-			_sep
-				read _ans
-				case ${_ans} in
-					y)	_header "Installing ${npm_package}"
-							_npm_setup
-							if [[ ${npm_test} == 1 ]]; then
-								_success "${npm_package} = Installed"
-							fi
-							npm_installed=1
-							;;
-					*)	_warning "${npm_package} is not installed"
-							npm_installed=0
-							;;
-				esac
 		fi
 	}
 #------------------------------------------------------------------------------#
@@ -61,7 +83,8 @@
 				_select "Press the Any Key to continue...."
 				read huh
 			else
-				_warning "No npm install tree: ${npm_package} not installed"
+				_sep
+				_error "No npm install tree: ${npm_package} not installed"
 				_sep
 			fi
 	}

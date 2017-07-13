@@ -30,12 +30,14 @@
   			l0=(
   				"NodeJS Install"
           "npm package tree"
+          "npm package install"
   				"Return"
   			)
       # Command map
   			opt0=(
   				'_nodejs_install'
           '_npm_package_tree'
+          '_npm_installer'
   				'main_menu'
   				)
       # Execute Menu
