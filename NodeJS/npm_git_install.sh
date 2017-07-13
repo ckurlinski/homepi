@@ -41,7 +41,7 @@
 			cd ${g_mod_dir}/${git_name}
 			_success "$(pwd)"
 		_sep
-			npm install -g --unsafe-perm --silent > /dev/null
+			${g_npm_install} --silent > /dev/null
 		_success "${git_name} installed"
 		_sep
 	}

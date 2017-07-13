@@ -23,7 +23,7 @@ for the package"
 	_npm_setup() {
 		## Install nodes
 			for i in "${npm_package}"; do
-					npm install -g --unsafe-perm --silent $i
+					${g_npm_install} $i
 				_success $i
 			done
 	}
@@ -35,7 +35,7 @@ for the package"
 		_sep
 			case ${_ans} in
 				y)	_header "Installing ${npm_package}"
-						_npm_setup
+						${g_npm_install} ${npm_package}
 						if [[ ${npm_test} == 1 ]]; then
 							_success "${npm_package} = Installed"
 						fi

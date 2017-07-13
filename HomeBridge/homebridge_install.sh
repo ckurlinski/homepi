@@ -21,7 +21,7 @@
 			for i in "${hb_install_list[@]}"; do
 				_header "Installing $i"
 				cd ${_install_dir}
-					npm install -g --unsafe-perm --silent $i > /dev/null
+					${g_npm_install} --silent $i > /dev/null
 				_success $i
 			done
 		## Create Symbolic Links
