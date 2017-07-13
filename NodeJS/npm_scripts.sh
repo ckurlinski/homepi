@@ -59,6 +59,7 @@ for the package"
 # Check to see if npm package is installed
 # var ${npm_package} is supplied
 	_npm_check_package() {
+		_npm_install_test
 		if [[ ${npm_installed} == 0 ]]; then
 			_sep
 			_error "${npm_package} is not installed"
