@@ -96,7 +96,6 @@
 		_success "System Arch = ${sys_arch}"
 		_sep
 	}
-
 #------------------------------------------------------------------------------#
 # convert to capitol letters
 	_all_caps() {
