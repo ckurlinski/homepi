@@ -1,19 +1,11 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# Test if superuser
-	_su_test() {
-		# Script must be run as root
-		if [ "$EUID" -ne 0 ]; then
-			_sep
-			_note "Setting npm global user:group to ${g_user}:${g_group}"
-				sudo chown -R ${g_user}:${g_group} ${g_node_dir}/{lib/node_modules,bin,share}
-			_success "Running scripts as ${g_user}:${g_group}"
-			_sep
+# Check to see if package is install - Input variable _dpkg
+	dpkg_check() {
+		if [[ $( dpkg-query -l ${_dpkg} >/dev/null || echo -1 ) -ge 0 ]]; then
+			_pkg=1
 		else
-			_sep
-			_error "Permissions issue"
-			_note "If running as root, all installations and services must run as root"
-			_sep
+			_pkg=0
 		fi
 	}
 #------------------------------------------------------------------------------#
