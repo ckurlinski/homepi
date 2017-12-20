@@ -11,9 +11,12 @@
 #------------------------------------------------------------------------------#
 # npm packege installler
 	_npm_installer() {
+		_sep
+		_note "If you want to add a npm package, create subfolder, shell scripts,
+		and configs for the package
+		The items will be automatically added when homepi starts"
+		_sep
 		_select "Select from npm packages with configs on system"
-		_note "If you want to add a npm package, create subfolder and configs
-for the package"
 		_sep
 		_node_select_package
 		_npm_install
