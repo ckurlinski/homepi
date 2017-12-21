@@ -41,6 +41,7 @@
 		# Set ownership and permissions on symbolic link
 			_cmd2_script_sym_per
 	}
+#------------------------------------------------------------------------------#
 ## FAAC Installation
 	_faac_install() {
 		# Check if cmdswitch2 is installed
@@ -52,3 +53,4 @@
 		# Create script - close
 			_faac_door_close_script_gen
 	}
+#------------------------------------------------------------------------------#s

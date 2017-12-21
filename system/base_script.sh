@@ -100,32 +100,96 @@
 	# Script wide listing function
 	# Needs "_l0" array or other assigned for this to work
 	# Sets selection value to "_list_output"
-		a=
+		counter=
 		count=1
+		c1=
+		a=
+		_header "${HEADING}"
 		for c0 in "${_l0[@]}"
 		do
 			a0[$count]=$c0
-			echo "$count ${a0[$count]}"
+			_select "$count ${a0[$count]}"
 			((count++))
 		done
+		counter=${count}
 		read c1
-			_list_output=${a0[$c1]}
+		_list_input_test		
+		_list_test_loop
+		_list_output=${a0[$c1]}
+	}
+#------------------------------------------------------------------------------#
+## _list_test_loop ##
+# Correct the selection input
+	_list_test_loop() {
+		while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
+			counter=
+			count=1
+			c1=
+			a=
+			_header "${HEADING}"
+			for c0 in "${_l0[@]}"
+			do
+				a0[$count]=$c0
+				_select "$count ${a0[$count]}"
+				((count++))
+			done
+			counter=${count}
+			read c1
+			_list_input_test
+		done
+	}
+#------------------------------------------------------------------------------#
+## _list_test ##
+# Test if input is a number
+	_list_input_test() {
+		#while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
+		case ${c1} in
+			[1-9]) _success "Entered - ${c1}";;
+			*) 	c1= 
+					_error "Bad Entry";;
+		esac
+	}
+#------------------------------------------------------------------------------#
+## _menu_test_loop ##
+# Correct the selection input
+	_menu_test_loop() {
+		while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
+			counter=
+			count=1
+			c1=
+			a=
+			_sep
+			_header "${HEADING}"
+			_sep
+			for c0 in "${l0[@]}"
+			do
+				a0[$count]=$c0
+				_select "$count ${a0[$count]}"
+				((count++))
+			done
+			counter=${count}
+			read c1
+			_list_input_test
+		done
 	}
 #------------------------------------------------------------------------------#
 # Menu List Function
 	_menu_list_template() {
+		a0=
+		c1=
 		count=1
-		for c0 in "${l0[@]}"
-		do
+		_sep
+		_header "${HEADING}"
+		_sep
+		for c0 in "${l0[@]}"; do
 			a0[$count]=$c0
 			_select "$count - ${a0[$count]}"
 			((count++))
 		done
+		counter=${count}
 		read c1
-		if [[ $c1 = [a-Z] ]]; then
-			_error "Bad Input - no donut"
-			return 1
-		fi
+		_list_input_test
+		_menu_test_loop
 		MENU_COUNT=${c1}
 		MENU_OUTPUT=${a0[$c1]}
 		opt_count=( `expr ${MENU_COUNT} - 1` )
@@ -140,8 +204,6 @@
 	_g_menu_fn() {
 		while :
 		do
-			_header "${HEADING}"
-			_sep
 			## Generate menu list from menu list array
 			_menu_list_template
 			_sep

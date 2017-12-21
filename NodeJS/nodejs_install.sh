@@ -1,5 +1,6 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+## _nodejs_version ##
 # Choose NodeJS version
 	_nodejs_version() {
 		_sep
@@ -17,6 +18,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _nodejs_download_list ##
 # List NodeJS Downloads
 	_nodejs_download_list() {
 		_sep
@@ -38,6 +40,7 @@
 		_success ${node_sel}
 	}
 #------------------------------------------------------------------------------#
+## _nodejs_install ##
 # Install NodeJS
 	_nodejs_install() {
 		_nodejs_download_list

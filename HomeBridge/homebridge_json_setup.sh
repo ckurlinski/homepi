@@ -1,11 +1,13 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# set systemd name
+## _hb_sysd_set_var ##
+# set systemd service name
 	_hb_sysd_set_var() {
 		sysd_name="${hb_name}"
 		git_node_dir="${hb_base_dir}"
 	}
 #------------------------------------------------------------------------------#
+## _hb_config_json_setup ##
 # HomeBridge config.json setup check
 	_hb_config_json_setup() {
 		## Stop existing HomeBridge service
@@ -34,6 +36,7 @@
 			fi
 	}
 #------------------------------------------------------------------------------#
+## _hb_config_json_tmp ##
 # HomeBridge config.raw Create
 	_hb_config_json_tmp() {
 		## Create the json config file
@@ -46,6 +49,7 @@
 			cat ${hb_config_tmp}
 	}
 #------------------------------------------------------------------------------#
+## _hb_node_name ##
 # HomeBridge Node Name
 	_hb_node_name() {
 		_header "Enter name for ${sysd_name}"
@@ -62,6 +66,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _hb_node_man ##
 # HomeBridge Server Name
 	_hb_node_man() {
 		hb_node_man="${hb_name} Server"
@@ -72,6 +77,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _hb_node_device_name ##
 # HomeBridge Node Device Name
 	_hb_node_device_name() {
 		_header "Enter Device ${sysd_name} Name for Node"
@@ -85,6 +91,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _hb_user_id ##
 # HomeBridge Random User ID
 	_hb_user_id() {
 		# Define random ranges
@@ -111,6 +118,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _hb_random_port ##
 # HomeBridge Random Port generator
 	_hb_random_port() {
 		# Generate random port
@@ -124,6 +132,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _hb_server_port ##
 # HomeBridge Server Random Port generator
 	_hb_server_port() {
 		# Generate random port
@@ -137,6 +146,7 @@
 			_sep
 	}
 #------------------------------------------------------------------------------#
+## _hb_pin_code ##
 # Random access code generator
 	_hb_pin_code() {
 		## Generate (8) random numbers for HomeBridge pin
@@ -156,6 +166,7 @@
 		sed -i "s/hb_pin_code/${hb_pin_code}/g" ${hb_config_tmp}
 	}
 #------------------------------------------------------------------------------#
+## _hb_config_json_install ##
 # HomeBridge config.json Create
 	_hb_config_json_install() {
 			_header "Preforming cleanup - ${hb_config_tmp} to ${hb_config_json}"
@@ -166,6 +177,7 @@
 			_success "Created ${hb_config_json}"
 	}
 #------------------------------------------------------------------------------#
+## _hb_config_install ##
 # Homebridge Create json config
 	_hb_config_install() {
 		# HomeBridge Node Name
@@ -201,5 +213,5 @@
 			_header "Setting permissions on ${hb_base_dir}"
 				sudo chmod -R 755 ${hb_base_dir}
 			_success "Changed Permissions"
-}
+	}
 #------------------------------------------------------------------------------#

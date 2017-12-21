@@ -1,5 +1,6 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+## _get_repo ##
 # Clone Git repo
   _get_repo() {
 		cd ${g_mod_dir}
@@ -24,6 +25,7 @@
 		fi
   }
 #------------------------------------------------------------------------------#
+## _get_branch ##
 # Git checkout branch
   _get_branch() {
 		_header "Entering global node install directory: ${g_mod_dir}/${git_name}"
@@ -35,6 +37,7 @@
 		_sep
   }
 #------------------------------------------------------------------------------#
+## _nodejs_software_install ##
 # Install software
 	_nodejs_software_install() {
 		_header "Installing ${git_name}"
@@ -46,6 +49,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _npm_create_executable ##
 # Creating npm global executable
 	_npm_create_executable() {
 		if [[ -f "${g_cmd_path}" ]]; then
@@ -61,6 +65,7 @@
 			_success "${g_cmd_path} made executable"
 	}
 #------------------------------------------------------------------------------#
+## _npm_create_sysd_exec ##
 # Creating systemd executable
 	_npm_create_sysd_exec() {
 			_header "Creating symbolic link"
@@ -68,3 +73,4 @@
 			sudo update-alternatives --install "${sysd_cmd_path}" "${sysd_name}" "${g_cmd_path}/${sysd_name}" 1
 			_success "${sysd_name}"
 	}
+#------------------------------------------------------------------------------#

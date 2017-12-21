@@ -1,5 +1,6 @@
 #!/bin/bash
-
+#------------------------------------------------------------------------------#
+## _service_cap_name ##
 # Set systemd service to all caps
 	_service_cap_name() {
 		_header "Capitolizing systemd service name: ${sysd_name}"
@@ -9,7 +10,8 @@
 		_success "${sysd_name} -> ${sysd_name_caps}"
 		_sep
 	}
-
+#------------------------------------------------------------------------------#
+## _sysd_services_remove ##
 # Existing System Service Check, Stop, and Removal
 	_sysd_services_remove() {
 		## Stop and disable existing services
@@ -33,7 +35,8 @@
 			_removed "Removed Existing Service Default file - ${sysd_default_file}"
 		fi
 	}
-
+#------------------------------------------------------------------------------#
+## _sysd_service_setup ##
 # systemd service setup
 	_sysd_service_setup() {
 			_header "Installing Service : ${sysd_service_file}"
@@ -50,6 +53,8 @@
 			cat ${sysd_service_file}
 			_sep
 	}
+#------------------------------------------------------------------------------#
+## _sysd_service_defaults_setup ##
 # systemd service defaults config
 	_sysd_service_defaults_setup() {
 		## Stop existing service
@@ -78,6 +83,8 @@
 			sudo chmod 644 ${sysd_default_file}
 			_success ${sysd_default_file}
 	}
+#------------------------------------------------------------------------------#
+## _sysd_service_install ##
 # systemd Service install Function
 	_sysd_service_install() {
 		_sysd_services_remove
@@ -88,3 +95,4 @@
 		sudo systemctl start ${sysd_name}
 		_success "${sysd_name} Started"
 	}
+#------------------------------------------------------------------------------#

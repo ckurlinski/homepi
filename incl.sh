@@ -1,5 +1,5 @@
 source FAAC/faac.conf
-source system/base.conf
+source system/base_dependency.conf
 source system/global.conf
 source HomeBridge/homebridge.conf
 source PoolController/PoolController.conf

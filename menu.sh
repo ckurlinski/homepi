@@ -86,7 +86,7 @@
 #------------------------------------------------------------------------------#
 # systemd service management menu
   systemd_menu()  {
-  		HEADING="systemd service management"
+  		HEADING="Systemd Services"
       # Menu listing
   			l0=(
   				"service status"
@@ -96,6 +96,7 @@
           "start service"
           "stop service"
           "daemon reload"
+					"view daemon config"
   				"Return"
   			)
       # Command map
@@ -107,6 +108,7 @@
           '_sysd_service_start'
           '_sysd_service_stop'
           '_sysd_reload_daemon'
+					'_sysd_view_unit_file'
   				'main_menu'
   				)
       # Execute Menu
