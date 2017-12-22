@@ -41,16 +41,10 @@
   source incl.sh
 #------------------------------------------------------------------------------#
 # Execute set color function
- _set_colors
+  _set_colors
 #------------------------------------------------------------------------------#
-# Execute super user test
- _su_test
-#------------------------------------------------------------------------------#
-# Execute sudo package test
- _sudo_test
-#------------------------------------------------------------------------------#
-# Execute sudoers test
- _sudoers_test
+# Execute startup user test
+  _user_tests
 #------------------------------------------------------------------------------#
 # Create HomePi ${g_node_dir} folder
   

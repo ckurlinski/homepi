@@ -1,5 +1,14 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+## _user_tests ##
+# Function that calls all the user test at program startup
+	_user_tests() {
+		_su_test
+		_sudo_test
+		_sudoers_test
+	}
+#------------------------------------------------------------------------------#
+## _su_test ##
 # Test if superuser
 	_su_test() {
 		if [ "$EUID" -ne 0 ]; then
@@ -13,6 +22,7 @@
 		fi
 	}
 #------------------------------------------------------------------------------#
+## _sudo_test ##
 # Test if sudo package is installed
 	_sudo_test() {
 		_dpkg="sudo"
@@ -25,6 +35,7 @@
 		esac
 	}
 #------------------------------------------------------------------------------#
+## _sudoers_test ##
 # Test if current user is in the sudoers file
 	_sudoers_test() {
 		if [ "$EUID" -eq 0 ]; then
@@ -46,6 +57,7 @@
 		fi	
 	}
 #------------------------------------------------------------------------------#
+## _system_user_check ##
 # System user check - Input ${_user_name} variable - Output ${_user_status}
     _system_user_check() {
         if [[ $(getent passwd ${_user_name} >/dev/null || echo -1) -ne 0 ]]; then
@@ -55,6 +67,7 @@
         fi
     }
 #------------------------------------------------------------------------------#
+## _system_user_create ##
 # System user create - Input ${_user_name} variable
     _system_user_create() {
         _header "Creating user - ${_user_name}"
@@ -67,6 +80,7 @@
         esac
     }
 #------------------------------------------------------------------------------#
+## _system_group_check ##
 # System group check - Input ${_group_name} variable - Output ${_group_status}
     _system_group_check() {
         if [[ $(getent group ${_group_name} >/dev/null || echo -1) -ne 0 ]]; then
@@ -76,6 +90,7 @@
         fi
     }
 #------------------------------------------------------------------------------#
+## _system_group_create ##
 # System group create - Input ${_group_name} variable
     _system_group_create() {
         _header "Creating system group - ${_group_name}"
@@ -86,3 +101,4 @@
             1) _warning "${_group_name} not created";;
         esac
     }
+#------------------------------------------------------------------------------#
