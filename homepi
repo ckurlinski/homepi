@@ -47,7 +47,7 @@
   _user_tests
 #------------------------------------------------------------------------------#
 # Create HomePi ${g_node_dir} folder
-  
+# Adding an update to test git
 #------------------------------------------------------------------------------#
 # Create symbolic link in ${g_node_dir} to homepi
   #_sym_link_homepi
