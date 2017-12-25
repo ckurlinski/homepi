@@ -40,7 +40,7 @@
 		if [[ ${_state} -eq 1 ]]; then
 			_sysd_service_status_test
 		else
-			_error "${_selected_service} unit is no installed"
+			_error "${_selected_service} service is not installed"
 		fi
 	}
 #------------------------------------------------------------------------------#

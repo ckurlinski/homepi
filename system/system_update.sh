@@ -1,7 +1,8 @@
 #!/bin/bash
-
 #------------------------------------------------------------------------------#
 # Update apt cache and upgrade
+	_menu_item=1
+	_menu_task="_system_update"
 	_system_update() {
 		_header "Updating apt cache"
 		sudo apt-get update > /dev/null

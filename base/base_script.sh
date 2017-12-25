@@ -1,7 +1,8 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-# Check to see if package is install - Input variable _dpkg
-	dpkg_check() {
+## _dpkg_check ##
+#		Check to see if package is install - Input variable _dpkg
+	_dpkg_check() {
 		if [[ $( dpkg-query -l ${_dpkg} >/dev/null || echo -1 ) -ge 0 ]]; then
 			_pkg=1
 		else
@@ -9,7 +10,8 @@
 		fi
 	}
 #------------------------------------------------------------------------------#
-# Set Colors
+## _set_colors ##
+#		Set Color codes to names
 	_set_colors() {
 		reset=$(echo -en '\033[0m')
 		red=$(echo -en '\033[00;31m')
@@ -30,36 +32,50 @@
 		white=$(echo -en '\033[01;37m')
 	}
 #------------------------------------------------------------------------------#
-# Set Print formatting
-	## Header
+## _header	##
+#		Header text format function
 		_header() {
 			printf "\n${lcyan}==========  %s  ==========${reset}\n" "$@"
 		}
-	## Menu selection
+#------------------------------------------------------------------------------#
+## _select	##
+#		Selection text format function
 		_select() {
 			printf "${lgreen}%s${reset}\n" "$@"
 		}
-	## Seperator
+#------------------------------------------------------------------------------#
+## _sep ##
+#		Seperator line format function
 		_sep() {
 			printf "\n${lpurple}========================================${reset}\n" "$@"
 		}
-	## Successful Command
+#------------------------------------------------------------------------------#
+## _success	##
+#		Successful text format function
 		_success() {
 			printf "${green}✔ %s${reset}\n" "$@"
 		}
-	## Error
+#------------------------------------------------------------------------------#
+## _error ##
+#		Error text formatting function
 		_error() {
 			printf "${red}✖ %s${reset}\n" "$@"
 		}
-	## Successful Removal
+#------------------------------------------------------------------------------#
+## _removed ##
+#		Removed text formtting function
 		_removed() {
 			printf "${green}✖ %s${reset}\n" "$@"
 		}
-	## Warning
+#------------------------------------------------------------------------------#
+## _warning ##
+#		Warning text formatting function
 		_warning() {
 			printf "${yellow}➜ %s${reset}\n" "$@"
 		}
-	## Note
+#------------------------------------------------------------------------------#
+## _note ##
+#		Note text formatting function
 		_note() {
 			printf "${lyellow}Note:${reset}  ${lyellow}%s${reset}\n" "$@"
 		}
@@ -95,7 +111,8 @@
 		str_caps=(`echo $str | awk '{print toupper($0)}'`)
 	}
 #------------------------------------------------------------------------------#
-# List Template
+## _list_template ##
+#		List Template
 	_list_template() {
 	# Script wide listing function
 	# Needs "_l0" array or other assigned for this to work
@@ -119,7 +136,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _list_test_loop ##
-# Correct the selection input
+#		Correct the selection input
 	_list_test_loop() {
 		while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
 			counter=
@@ -140,7 +157,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _list_test ##
-# Test if input is a number
+#		Test if input is a number
 	_list_input_test() {
 		#while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
 		case ${c1} in
@@ -151,7 +168,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _menu_test_loop ##
-# Correct the selection input
+#		Correct the selection input
 	_menu_test_loop() {
 		while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
 			counter=
@@ -173,7 +190,47 @@
 		done
 	}
 #------------------------------------------------------------------------------#
-# Menu List Function
+## _menu_create_name
+#   Output menu item name to file
+  _menu_create_name() {
+      awk 'BEGIN {
+        FS="\n"
+        RS=""
+        }
+        {
+          if ($1 == "_menu_include=1") {
+            print$2
+          }
+        }' >> menu.conf
+  }
+#------------------------------------------------------------------------------#
+## _menu_create_command
+#   Output menu command name to file
+    _menu_create_command() {
+      awk 'BEGIN {
+        FS="\n"
+        RS=""
+        }
+        {
+          if ($1 == "_menu_include=1") {
+            print$3
+          }
+        }' >> menu.conf
+  }
+#------------------------------------------------------------------------------#
+## _menu_create
+#   Populates the Menu Arrays
+  _menu_create() {
+    echo "l0=(" >> menu.conf
+    cat ${file_in} | _menu_create_name
+    echo ")" >> menu.conf
+    echo "opt0=(" >> menu.conf
+    cat ${file_in} | _menu_create_command
+    echo ")" >> menu.conf
+  }
+#------------------------------------------------------------------------------#
+## _menu_list_template ##
+#		Menu List Function
 	_menu_list_template() {
 		a0=
 		c1=
@@ -195,12 +252,14 @@
 		opt_count=( `expr ${MENU_COUNT} - 1` )
 	}
 #------------------------------------------------------------------------------#
-# Command to run from menu command array
+## _menu_command_run ##
+#		Command to run from menu command array
 	_menu_command_run() {
 		${opt0[$opt_count]}
 	}
 #------------------------------------------------------------------------------#
-# Generic Base Menu Function
+## _g_menu_fn ##
+#		Global Menu Function
 	_g_menu_fn() {
 		while :
 		do
@@ -211,3 +270,4 @@
 			_menu_command_run
 		done
 	}
+#------------------------------------------------------------------------------#
