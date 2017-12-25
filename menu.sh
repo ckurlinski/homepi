@@ -2,27 +2,6 @@
 #------------------------------------------------------------------------------#
 ############################# HomePi menu list #################################
 #------------------------------------------------------------------------------#
-# System Menu
-  system_menu()  {
-  		HEADING="System Menu"
-      # Menu listing
-  			l0=(
-  				"Update Raspbian Base System"
-  				"Install Dependencies"
-  				"NodeJS install"
-  				"Return"
-  			)
-      # Command map
-  			opt0=(
-  				'_system_update'
-  				'_system_depends_install'
-  				'_nodejs_install'
-  				'main_menu'
-  				)
-      # Execute Menu
-        _g_menu_fn
-  }
-#------------------------------------------------------------------------------#
 # NodeJS Menu
   nodejs_menu()  {
   		HEADING="NodeJS Menu"
@@ -124,7 +103,7 @@
   				"NodeJS and npm"
           "Homebridge Menu"
   				"Pool PI Menu"
-  				"systemd Service Management"
+  				"System Service"
   				"Exit"
   			)
       # Command map

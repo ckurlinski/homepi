@@ -12,7 +12,7 @@
 # Test if superuser
 	_su_test() {
 		if [ "$EUID" -ne 0 ]; then
-			_note "Using $(whoami) to do the homepi install"
+			_note "Using $(whoami) for homepi"
 		else
 			_sep
 			_error "Permissions issue"

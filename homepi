@@ -13,6 +13,15 @@
       | awk '{print"source "$0}' > incl.sh
   }
 #------------------------------------------------------------------------------#
+# Execute to populate menus
+  source_menu_scripts() {
+    find . -type f -name "*.menu" \
+      ! -path "./.git/*" \
+      | sed 's/\.\///g' \
+      | awk '{print"source "$0}' > incl.sh
+  }
+
+#------------------------------------------------------------------------------#
 # Execute to set mode on scripts
   source_set_mod() {
     find . -type f -name "*.sh" \
@@ -31,9 +40,10 @@
   }
 #------------------------------------------------------------------------------#
 # Create Source File: ./incl.sh
-# Automatically updates incl.sh to include all *.conf and *.sh in the tree
-#  except .git folders, and incl.sh
+# Automatically updates incl.sh to include all *.conf, *.menu and *.sh in the
+#  tree except .git folders, and incl.sh
   source_conf_scripts
+  source_menu_scripts
   source_sh_scripts
   source_set_mod
 #------------------------------------------------------------------------------#

@@ -1,0 +1,23 @@
+#!/bin/bash
+#------------------------------------------------------------------------------#
+# System Menu
+  system_menu()  {
+  		HEADING="System Menu"
+      # Menu listing
+  			l0=(
+  				"Update Raspbian Base System"
+  				"Install Dependencies"
+  				"NodeJS install"
+  				"Return"
+  			)
+      # Command map
+  			opt0=(
+  				'_system_update'
+  				'_system_depends_install'
+  				'_nodejs_install'
+  				'main_menu'
+  				)
+      # Execute Menu
+        _g_menu_fn
+  }
+#------------------------------------------------------------------------------#
