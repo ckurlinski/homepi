@@ -27,7 +27,6 @@
 		# Test system arch if unknown
 			if [[ ${sys_arch} == 0 ]]; then
 				_warning "Unknown System Arch detected, Aborting....."
-				break 1
 			fi
 		_select "Choose NodeJS to download"
 		_l0=(`curl -s ${nodejs_web}/${nodejs_ver}/ \
