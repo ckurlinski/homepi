@@ -1,7 +1,7 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 # System Menu
-  system_menu()  {
+  _system_menu()  {
   		HEADING="System Menu"
       # Menu listing
   			l0=(
