@@ -5,6 +5,7 @@
   SOURCE=$(dirname $(readlink -f $0))
   cd ${SOURCE}
 #------------------------------------------------------------------------------#
+## source_conf_scripts ##
 # Execute to populate configs
   source_conf_scripts() {
     find . -type f -name "*.conf" \
@@ -13,15 +14,16 @@
       | awk '{print"source "$0}' > incl.sh
   }
 #------------------------------------------------------------------------------#
+## source_menu_scripts ##
 # Execute to populate menus
   source_menu_scripts() {
     find . -type f -name "*.menu" \
       ! -path "./.git/*" \
       | sed 's/\.\///g' \
-      | awk '{print"source "$0}' > incl.sh
+      | awk '{print"source "$0}' >> incl.sh
   }
-
 #------------------------------------------------------------------------------#
+## source_set_mod ##
 # Execute to set mode on scripts
   source_set_mod() {
     find . -type f -name "*.sh" \
@@ -30,11 +32,13 @@
       | xargs chmod 644
   }
 #------------------------------------------------------------------------------#
+## source_sh_scripts ##
 # Execute to populate source scripts
   source_sh_scripts() {
       find . -type f -name "*.sh" \
         ! -path "./.git/*" \
         ! -name "incl.sh" \
+        ! -name "misc.sh" \
         | sed 's/\.\///g' \
         | awk '{print"source "$0}' >> incl.sh
   }
@@ -66,5 +70,5 @@
   #_npm_package_list_gen
 #------------------------------------------------------------------------------#
 # Execute main menu
-	main_menu
+	_main_menu
 #------------------------------------------------------------------------------#

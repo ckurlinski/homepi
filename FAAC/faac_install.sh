@@ -1,5 +1,6 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+## _faac_door_open_script_gen ##
 # Install FAAC door open into script_cmd_dir
 	_faac_door_open_script_gen() {
 		# File to be created
@@ -21,6 +22,7 @@
 			_cmd2_script_sym_per
 	}
 #------------------------------------------------------------------------------#
+## _faac_door_close_script_gen ##
 # Install FAAC door open into script_cmd_dir
 	_faac_door_close_script_gen() {
 		# File to be created
@@ -42,7 +44,8 @@
 			_cmd2_script_sym_per
 	}
 #------------------------------------------------------------------------------#
-## FAAC Installation
+## _faac_install ##
+# FAAC Installation
 	_faac_install() {
 		# Check if cmdswitch2 is installed
 			_cmd_install_check

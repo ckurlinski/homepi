@@ -27,7 +27,7 @@
 ## _npm_setup ##
 # Install a npm
 	_npm_setup() {
-		## Install nodes
+		# Install nodes
 			for i in "${npm_package}"; do
 					${g_npm_install} $i
 				_success $i
@@ -101,8 +101,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _npm_package_list_gen ##
-# Generate npm package installation list
-# Pulls the var ${npm_package_name} from config files
+# Generate npm package installation list Pulls the var ${npm_package_name} from config files
 	_npm_package_list_gen() {
 		find . -type f -name "*.conf" \
       ! -path "./.git/*" \

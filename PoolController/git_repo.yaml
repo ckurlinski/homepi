@@ -1,0 +1,5 @@
+OPTIONAL_INSTALL: poolcontroller
+DESCRIPTION: Option to install the cmdswitch2 package
+WEBSITE: https://github.com/tagyoureit/nodejs-poolController.git
+GITHUB: git@github.com:tagyoureit/nodejs-poolController.git
+GITBRANCH: 4.x-DEV

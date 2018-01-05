@@ -1,12 +1,5 @@
-source cmdswitch2/cmdswitch2.conf
-source PoolController/PoolController.conf
-source FAAC/faac.conf
-source HomeBridge/homebridge.conf
-source systemd/service_list.conf
-source systemd/systemd.conf
-source NodeJS/npm.conf
-source system/base_dependency.conf
-source system/global.conf
+source system/system.menu
+source base/base_script.sh
 source cmdswitch2/cmdswitch2_cmd_install.sh
 source PoolController/poolcontroller_install.sh
 source PoolController/poolcontroller_service_install.sh
@@ -21,6 +14,4 @@ source NodeJS/npm_scripts.sh
 source NodeJS/npm_git_install.sh
 source NodeJS/nodejs_install.sh
 source system/system_users_groups.sh
-source system/base_script.sh
-source system/homepi_installer.sh
 source system/system_update.sh

@@ -1,7 +1,7 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 ## _sysd_unit_installed_test ##
-# Test o see if the systemd daemon is installed
+# Test to see if the systemd daemon is installed
 	_sysd_unit_installed_test() {
 	if [[ -z $(systemctl list-units | grep unbound) ]]; then 
 		_state=0

@@ -10,7 +10,7 @@
 ## _hb_config_json_setup ##
 # HomeBridge config.json setup check
 	_hb_config_json_setup() {
-		## Stop existing HomeBridge service
+		# Stop existing HomeBridge service
 			if [ $(sudo ps -aux | grep -c '^${sysd_name}') = 1 ]; then
 				_header "Stopping ${sysd_name} Services"
 					sudo systemctl stop homebridge
@@ -22,13 +22,13 @@
 			sudo mkdir ${hb_base_dir}
 			sudo chown -R ${g_user}:${g_group} ${hb_base_dir}
 		fi
-		## Remove existing HomeBridge config.tmp
+		# Remove existing HomeBridge config.tmp
 			if [ -e ${hb_config_tmp} ]; then
 				_header "Removing" ${hb_config_tmp}
 				sudo rm -rf ${hb_config_tmp}
 				_removed "Removed" ${hb_config_tmp}
 			fi
-		## Remove existing HomeBridge config.json
+		# Remove existing HomeBridge config.json
 			if [ -e ${_config_json} ]; then
 				_header "Removing" ${_config_json}
 				sudo rm -rf ${_config_json}
@@ -39,7 +39,7 @@
 ## _hb_config_json_tmp ##
 # HomeBridge config.raw Create
 	_hb_config_json_tmp() {
-		## Create the json config file
+		# Create the json config file
 			_header "Creating tmp config : ${hb_config_tmp}"
 			for i in "${hb_config_list[@]}"; do
 				echo $i >> ${hb_config_tmp}
@@ -149,7 +149,7 @@
 ## _hb_pin_code ##
 # Random access code generator
 	_hb_pin_code() {
-		## Generate (8) random numbers for HomeBridge pin
+		# Generate (8) random numbers for HomeBridge pin
 			a=`echo $((1 + RANDOM % 9))`
 			b=`echo $((1 + RANDOM % 9))`
 			c=`echo $((1 + RANDOM % 9))`
@@ -158,9 +158,9 @@
 			f=`echo $((1 + RANDOM % 9))`
 			g=`echo $((1 + RANDOM % 9))`
 			h=`echo $((1 + RANDOM % 9))`
-		## Assemble and format numbers
+		# Assemble and format numbers
 			hb_pin_code="${a}${b}${c}-${d}${e}-${f}${g}${h}"
-		## Show HomeBridge random pin
+		# Show HomeBridge random pin
 			_header "Generating ${sysd_name} access code"
 			_warning ${hb_pin_code}
 		sed -i "s/hb_pin_code/${hb_pin_code}/g" ${hb_config_tmp}

@@ -59,7 +59,7 @@
 			echo ${npm_start_cmd} > ${g_cmd_path}
 			_success "${g_cmd_path} Created"
 		fi
-		## Make file executable
+		# Make file executable
 			_header "Making ${g_cmd_path} executable"
 			chmod +x ${g_cmd_path}
 			_success "${g_cmd_path} made executable"

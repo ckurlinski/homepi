@@ -1,5 +1,6 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
+## _system_update ##
 # Update apt cache and upgrade
 	_menu_item=1
 	_menu_task="_system_update"
@@ -12,6 +13,7 @@
 		_header "Upgrading System - Done!"
 	}
 #------------------------------------------------------------------------------#
+## _system_depends_install ##
 # Install Dependencies
 	_system_depends_install() {
 		for i in "${depends_install_list[@]}"; do

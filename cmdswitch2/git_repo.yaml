@@ -1,0 +1,4 @@
+OPTIONAL_INSTALL: cmdswitch2
+DESCRIPTION: Option to install the cmdswitch2 package
+WEBSITE: https://www.npmjs.com/package/homebridge-cmdswitch2
+GITHUB: git@github.com:luisiam/homebridge-cmdswitch2.git

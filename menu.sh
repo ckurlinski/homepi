@@ -1,9 +1,8 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
-############################# HomePi menu list #################################
-#------------------------------------------------------------------------------#
+## _nodejs_menu ##
 # NodeJS Menu
-  nodejs_menu()  {
+  _nodejs_menu()  {
   		HEADING="NodeJS Menu"
       # Menu listing
   			l0=(
@@ -23,8 +22,9 @@
         _g_menu_fn
   }
 #------------------------------------------------------------------------------#
+## _homebridge_menu ##
 # HomeBridge Menu
-  homebridge_menu()  {
+  _homebridge_menu()  {
   		HEADING="Homebridge Menu"
       # Menu listing
   			l0=(
@@ -44,8 +44,9 @@
         _g_menu_fn
   }
 #------------------------------------------------------------------------------#
+## _pool_menu ##
 # Pool Menu
-  pool_menu()  {
+  _pool_menu()  {
   		HEADING="Pool Controller"
       # Menu listing
   			l0=(
@@ -63,8 +64,9 @@
         _g_menu_fn
   }
 #------------------------------------------------------------------------------#
+## _systemd_menu ##
 # systemd service management menu
-  systemd_menu()  {
+  _systemd_menu()  {
   		HEADING="Systemd Services"
       # Menu listing
   			l0=(
@@ -94,8 +96,9 @@
         _g_menu_fn
   }
 #------------------------------------------------------------------------------#
+## _main_menu ##
 # Main Menu
-  main_menu()  {
+  _main_menu()  {
   		HEADING="HomePi"
       # Menu listing
   			l0=(
@@ -108,13 +111,14 @@
   			)
       # Command map
   			opt0=(
-  				'system_menu'
-  				'nodejs_menu'
-          'homebridge_menu'
-  				'pool_menu'
-  				'systemd_menu'
+  				'_system_menu'
+  				'_nodejs_menu'
+          '_homebridge_menu'
+  				'_pool_menu'
+  				'_systemd_menu'
   				'exit'
   				)
       # Execute Menu
         _g_menu_fn
   }
+#------------------------------------------------------------------------------#

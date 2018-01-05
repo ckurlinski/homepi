@@ -14,7 +14,7 @@
 ## _sysd_services_remove ##
 # Existing System Service Check, Stop, and Removal
 	_sysd_services_remove() {
-		## Stop and disable existing services
+		# Stop and disable existing services
 		if [ $(sudo ps -aux | grep -c '^${sysd_name}') = 1 ]; then
 			_header "Stopping and removing ${sysd_name} Services"
 			sudo systemctl stop ${sysd_name}
@@ -22,13 +22,13 @@
 			sudo systemctl daemon-reload
 			_removed "Stopping and removing ${sysd_name} Services - Done!"
 		fi
-		## Remove existing service file
+		# Remove existing service file
 		if [ -e ${sysd_service_file} ]; then
 			_header "Removing Existing server file - ${sysd_service_file}"
 			sudo rm -rf ${sysd_service_file}
 			_removed "Removed Existing server file - ${sysd_service_file}"
 		fi
-		## Remove existing  service default file
+		# Remove existing  service default file
 		if [ -e ${sysd_default_file} ]; then
 			_header "Removing Existing Service Default file - ${sysd_default_file}"
 			sudo rm -rf ${sysd_default_file}
@@ -40,14 +40,14 @@
 # systemd service setup
 	_sysd_service_setup() {
 			_header "Installing Service : ${sysd_service_file}"
-		## Config file is called from config/*.conf -- * is the name of the service
-		## Create Service file
+		# Config file is called from config/*.conf -- * is the name of the service
+		# Create Service file
 			_header "Installing ${sysd_service_file}"
 			for i in "${sysd_service_list[@]}"; do
 				sudo echo $i >> ${sysd_service_file}
 			done
 			_success "Installed ${sysd_service_file}"
-		## Show Service File
+		# Show Service File
 			_note ${sysd_service_file}
 			_sep
 			cat ${sysd_service_file}
@@ -57,27 +57,27 @@
 ## _sysd_service_defaults_setup ##
 # systemd service defaults config
 	_sysd_service_defaults_setup() {
-		## Stop existing service
+		# Stop existing service
 			_sysd_services_remove
-		## Run service config install
+		# Run service config install
 			_sysd_service_setup
-		## Config file is called from config/*.conf -- * is the name of the service
+		# Config file is called from config/*.conf -- * is the name of the service
 			_header "Installing Service Defaults - ${sysd_default_file}"
 			for i in "${sysd_default_list[@]}"; do
 				sudo echo $i >> ${sysd_default_file}
 			done
 			_success "Install ${sysd_default_file}"
-		## Show service defaults file
+		# Show service defaults file
 			_sep
 			cat ${sysd_default_file}
 			_sep
-		## Setting permissions - systemd service
+		# Setting permissions - systemd service
 			_header "Setting default permissions on files and folders"
 			_header ${sysd_service_file}
 			sudo chown ${_username}:${_username} ${sysd_service_file}
 			sudo chmod 644 ${sysd_service_file}
 			_success ${sysd_service_file}
-		## Seting permissions - systemd service defaults
+		# Seting permissions - systemd service defaults
 			_header  ${sysd_default_file}
 			sudo chown ${g_user}:${g_group} ${sysd_default_file}
 			sudo chmod 644 ${sysd_default_file}

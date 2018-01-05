@@ -21,7 +21,6 @@
 ## _hb_install ##
 # Install HomeBridge-server
 	_hb_install() {
-		## Install nodes
 			for i in "${hb_install_list[@]}"; do
 				_header "Installing $i"
 				cd ${_install_dir}
@@ -33,11 +32,9 @@
 ## _hb_sym_link ##
 # Create symbolic links to homebridge executable
 	_hb_sym_link() {
-		## Create Symbolic Links
 			_header "Creating symbolic link to /usr/bin/homebridge"
 				sudo update-alternatives --install "/usr/bin/homebridge" "homebridge" "${g_node_dir}/lib/node_modules/homebridge/bin/homebridge" 1
 			_success "homebridge"
-		## Create HomeBridge working directory
 			_header "Create HomeBridge Var Directory"
 				sudo mkdir -p ${hb_base_dir}
 			_success ${hb_base_dir}

@@ -1,7 +1,7 @@
 #!/bin/bash
 #------------------------------------------------------------------------------#
 ## _dpkg_check ##
-#		Check to see if package is install - Input variable _dpkg
+# Check to see if package is install - Input variable _dpkg
 	_dpkg_check() {
 		if [[ $( dpkg-query -l ${_dpkg} >/dev/null || echo -1 ) -ge 0 ]]; then
 			_pkg=1
@@ -11,7 +11,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _set_colors ##
-#		Set Color codes to names
+# Set Color codes to names
 	_set_colors() {
 		reset=$(echo -en '\033[0m')
 		red=$(echo -en '\033[00;31m')
@@ -32,54 +32,55 @@
 		white=$(echo -en '\033[01;37m')
 	}
 #------------------------------------------------------------------------------#
-## _header	##
-#		Header text format function
+## _header ##
+# Header text format function
 		_header() {
 			printf "\n${lcyan}==========  %s  ==========${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
-## _select	##
-#		Selection text format function
+## _select ##
+# Selection text format function
 		_select() {
 			printf "${lgreen}%s${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
 ## _sep ##
-#		Seperator line format function
+# Seperator line format function
 		_sep() {
 			printf "\n${lpurple}========================================${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
-## _success	##
-#		Successful text format function
+## _success ##
+# Successful text format function
 		_success() {
 			printf "${green}✔ %s${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
 ## _error ##
-#		Error text formatting function
+# Error text formatting function
 		_error() {
 			printf "${red}✖ %s${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
 ## _removed ##
-#		Removed text formtting function
+# Removed text formtting function
 		_removed() {
 			printf "${green}✖ %s${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
 ## _warning ##
-#		Warning text formatting function
+# Warning text formatting function
 		_warning() {
 			printf "${yellow}➜ %s${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
 ## _note ##
-#		Note text formatting function
+# Note text formatting function
 		_note() {
 			printf "${lyellow}Note:${reset}  ${lyellow}%s${reset}\n" "$@"
 		}
 #------------------------------------------------------------------------------#
+## _ans_check ##
 # Null responce check
 	_ans_check() {
 		while [ -z "${_ans}" ]; do
@@ -89,6 +90,7 @@
 		done
 	}
 #------------------------------------------------------------------------------#
+## _system_os_arch_detect ##
 # Get system OS and Arch
 	_system_os_arch_detect() {
 		sys_os=(`uname`)
@@ -105,6 +107,7 @@
 		_sep
 	}
 #------------------------------------------------------------------------------#
+## _all_caps ##
 # convert to capitol letters
 	_all_caps() {
 		# Input str - Output str_caps
@@ -112,7 +115,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _list_template ##
-#		List Template
+# List Template
 	_list_template() {
 	# Script wide listing function
 	# Needs "_l0" array or other assigned for this to work
@@ -136,7 +139,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _list_test_loop ##
-#		Correct the selection input
+# Correct the selection input
 	_list_test_loop() {
 		while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
 			counter=
@@ -157,18 +160,18 @@
 	}
 #------------------------------------------------------------------------------#
 ## _list_test ##
-#		Test if input is a number
+# Test if input is a number
 	_list_input_test() {
 		#while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
 		case ${c1} in
-			[1-9]) _success "Entered - ${c1}";;
+			[1-9]*) _success "Entered - ${c1}";;
 			*) 	c1= 
 					_error "Bad Entry";;
 		esac
 	}
 #------------------------------------------------------------------------------#
 ## _menu_test_loop ##
-#		Correct the selection input
+# Correct the selection input
 	_menu_test_loop() {
 		while [ -z ${c1}  ] || [ ${c1} -gt ${counter} ]; do
 			counter=
@@ -191,7 +194,7 @@
 	}
 #------------------------------------------------------------------------------#
 ## _menu_create_name
-#   Output menu item name to file
+# Output menu item name to file
   _menu_create_name() {
       awk 'BEGIN {
         FS="\n"
@@ -205,7 +208,7 @@
   }
 #------------------------------------------------------------------------------#
 ## _menu_create_command
-#   Output menu command name to file
+# Output menu command name to file
     _menu_create_command() {
       awk 'BEGIN {
         FS="\n"
@@ -219,7 +222,7 @@
   }
 #------------------------------------------------------------------------------#
 ## _menu_create
-#   Populates the Menu Arrays
+# Populates the Menu Arrays
   _menu_create() {
     echo "l0=(" >> menu.conf
     cat ${file_in} | _menu_create_name
@@ -230,7 +233,7 @@
   }
 #------------------------------------------------------------------------------#
 ## _menu_list_template ##
-#		Menu List Function
+# Menu List Function
 	_menu_list_template() {
 		a0=
 		c1=
@@ -253,20 +256,20 @@
 	}
 #------------------------------------------------------------------------------#
 ## _menu_command_run ##
-#		Command to run from menu command array
+# Command to run from menu command array
 	_menu_command_run() {
 		${opt0[$opt_count]}
 	}
 #------------------------------------------------------------------------------#
 ## _g_menu_fn ##
-#		Global Menu Function
+# Global Menu Function
 	_g_menu_fn() {
 		while :
 		do
-			## Generate menu list from menu list array
+			# Generate menu list from menu list array
 			_menu_list_template
 			_sep
-			## Run choosen command from menu command array
+			# Run choosen command from menu command array
 			_menu_command_run
 		done
 	}
