@@ -18,7 +18,7 @@
     find . -type f -name "*.menu" \
       ! -path "./.git/*" \
       | sed 's/\.\///g' \
-      | awk '{print"source "$0}' > incl.sh
+      | awk '{print"source "$0}' >> incl.sh
   }
 
 #------------------------------------------------------------------------------#
