@@ -27,7 +27,7 @@
 	_sudo_test() {
 		_dpkg="sudo"
 		_header "Testing if ${_dpkg} is installed"
-		dpkg_check
+		_dpkg_check
 		case ${_pkg} in
 			1) _success "${_dpkg} is installed";;
 			0) _warning "${_dpkg} is not Installed, Aborting...."
