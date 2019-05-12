@@ -12,10 +12,9 @@
 		# systemd service description
 		  sysd_service_descr="Node.js HomeKit ${sysd_name} Service"
 		#--------------------------------------------------------------------------#
-		_success "${sysd_name} -> ${sysd_name_caps}"
-		_success "${sysd_service_file}/${sysd_name_service}"
-		_success "${sysd_service_descr}"
-		read huh
+		# Complete File name and location of systemd service file
+		sysd_service_name="${sysd_service_file}/${sysd_name_service}"
+		#--------------------------------------------------------------------------#
 		_sep
 	}
 #------------------------------------------------------------------------------#
@@ -32,9 +31,9 @@
 		fi
 		## Remove existing service file
 		if [ -e ${sysd_service_file} ]; then
-			_header "Removing Existing server file - ${sysd_service_file}"
-			sudo rm -rf ${sysd_service_file}
-			_removed "Removed Existing server file - ${sysd_service_file}"
+			_header "Removing Existing server file - ${sysd_service_name}"
+			sudo rm -rf ${sysd_service_name}
+			_removed "Removed Existing server file - ${sysd_service_name}"
 		fi
 		## Remove existing service default file
 		if [ -e ${sysd_default_file} ]; then
@@ -47,18 +46,18 @@
 ## _sysd_service_setup ##
 # systemd service setup
 	_sysd_service_setup() {
-			_header "Installing Service : ${sysd_service_file}"
+			_header "Installing Service : ${sysd_service_name}"
 		## Config file is called from config/*.conf -- * is the name of the service
 		## Create Service file
-			_header "Installing ${sysd_service_file}"
-			for i in "${sysd_service_list[@]}"; do
-				sudo echo $i >> ${sysd_service_file}
+			_header "Installing ${sysd_service_name}"
+			for i in "${sysd_service_name[@]}"; do
+				sudo echo $i >> ${sysd_service_name}
 			done
-			_success "Installed ${sysd_service_file}"
+			_success "Installed ${sysd_service_name}"
 		## Show Service File
-			_note ${sysd_service_file}
+			_note ${sysd_service_name}
 			_sep
-			cat ${sysd_service_file}
+			cat ${sysd_service_name}
 			_sep
 	}
 #------------------------------------------------------------------------------#
