@@ -7,8 +7,13 @@
 		str=${sysd_name}
 			_all_caps
 		sysd_name_caps="${str_caps}"
+		sysd_name_service="${sysd_name}.service"
+		#--------------------------------------------------------------------------#
+		# systemd service description
+		  sysd_service_descr="Node.js HomeKit ${sysd_name} Service"
+		#--------------------------------------------------------------------------#
 		_success "${sysd_name} -> ${sysd_name_caps}"
-		_success "${sysd_service_file}"
+		_success "${sysd_service_file}/${sysd_name_service}"
 		_success "${sysd_service_descr}"
 		read huh
 		_sep
