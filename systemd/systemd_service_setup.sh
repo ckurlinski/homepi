@@ -9,6 +9,7 @@
 		sysd_name_caps="${str_caps}"
 		_success "${sysd_name} -> ${sysd_name_caps}"
 		_success "${sysd_service_file}"
+		_success "${sysd_service_descr}"
 		read huh
 		_sep
 	}
