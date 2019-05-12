@@ -3,11 +3,13 @@
 ## _service_cap_name ##
 # Set systemd service to all caps
 	_service_cap_name() {
-		_header "Capitolizing systemd service name: ${sysd_name}"
+		_header "Capitalizing systemd service name: ${sysd_name}"
 		str=${sysd_name}
 			_all_caps
 		sysd_name_caps="${str_caps}"
 		_success "${sysd_name} -> ${sysd_name_caps}"
+		_success "${sysd_service_file}"
+		read huh
 		_sep
 	}
 #------------------------------------------------------------------------------#
@@ -28,7 +30,7 @@
 			sudo rm -rf ${sysd_service_file}
 			_removed "Removed Existing server file - ${sysd_service_file}"
 		fi
-		## Remove existing  service default file
+		## Remove existing service default file
 		if [ -e ${sysd_default_file} ]; then
 			_header "Removing Existing Service Default file - ${sysd_default_file}"
 			sudo rm -rf ${sysd_default_file}
